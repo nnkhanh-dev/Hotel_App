@@ -1,8 +1,8 @@
 ﻿using HotelApp.Models;
-using HotelManage.Data;
+using HotelApp.Data;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HotelManage.Controllers
+namespace HotelApp.Controllers
 {
     public class HotelController : Controller
     {

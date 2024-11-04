@@ -1,13 +1,13 @@
 ﻿using HotelApp.Models;
-using HotelManage.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 
-namespace HotelManage.Data
+
+namespace HotelApp.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+            public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
             public DbSet<RoomType> RoomTypes { get; set; }
             public DbSet<Amenity> Amenities { get; set; }
             public DbSet<Room> Rooms { get; set; }
@@ -15,6 +15,7 @@ namespace HotelManage.Data
             public DbSet<Image> Images { get; set; }
             public DbSet<Area> Areas { get; set; }
             public DbSet<Contact> Contacts { get; set; }
+            public DbSet<AppUser> AppUsers { get; set; }
 
     }
 }

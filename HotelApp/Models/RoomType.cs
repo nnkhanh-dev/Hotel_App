@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HotelManage.Models
+namespace HotelApp.Models
 {
     public class RoomType
     {

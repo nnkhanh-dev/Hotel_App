@@ -16,6 +16,6 @@ namespace HotelApp.Models
         public string PhoneNumber { get; set; }
         [Required]
         [StringLength(255)]
-        public string Content { get; set; }
+        public string Message { get; set; }
     }
 }

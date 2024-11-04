@@ -1,4 +1,4 @@
-using HotelManage.Data;
+using HotelApp.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

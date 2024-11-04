@@ -209,7 +209,7 @@
                                 <input class="contactus" placeholder="Số điện thoại" type="text" name="PhoneNumber">
                             </div>
                             <div class="col-md-12">
-                                <textarea class="textarea" placeholder="Nội dung" name="Content"></textarea>
+                                <textarea class="textarea" placeholder="Nội dung" name="Message"></textarea>
                             </div>
                             <div class="col-md-12">
                                 <button type="submit" class="send_btn">Gửi</button>
@@ -284,6 +284,7 @@
     <!-- loaddata -->
     <script src="~/loaddata/loadroomtypes.js"></script>
     <script src="~/loaddata/loadvouchers.js"></script>
+    <!-- Thông báo -->
     <script>
     $(document).ready(function () {
         @if (TempData["SuccessMessage"] != null)
