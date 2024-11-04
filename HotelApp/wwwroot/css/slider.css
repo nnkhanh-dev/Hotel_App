@@ -1,0 +1,22 @@
+﻿/* Đảm bảo các nút điều hướng nằm hai bên */
+.owl-carousel .owl-nav button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 2rem; /* Tăng kích thước nút điều hướng */
+    cursor: pointer;
+}
+
+/* Nút điều hướng bên trái */
+.owl-carousel .owl-nav .owl-prev {
+    left: -30px; /* Đẩy sang trái */
+}
+
+/* Nút điều hướng bên phải */
+.owl-carousel .owl-nav .owl-next {
+    right: -30px; /* Đẩy sang phải */
+}
+
