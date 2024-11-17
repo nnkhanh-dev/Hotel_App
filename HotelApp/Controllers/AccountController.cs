@@ -65,7 +65,7 @@ public class AccountController(SignInManager<AppUser> signInManager, UserManager
                                 return RedirectToAction("Index", "Home", new { area = "Client" });
                             }
                             else
-                                return RedirectToAction("index", "Hotel");
+                                return RedirectToAction("Index", "Hotel");
                         }
 
                     }

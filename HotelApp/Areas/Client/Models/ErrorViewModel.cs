@@ -1,5 +1,4 @@
-namespace HotelApp.Areas.Client.Models
-
+namespace HotelApp.Models
 {
     public class ErrorViewModel
     {
