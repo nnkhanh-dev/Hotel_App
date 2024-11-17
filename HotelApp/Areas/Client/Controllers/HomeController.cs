@@ -7,6 +7,7 @@ namespace HotelApp.Areas.Client.Controllers
     [Authorize(Roles = "Client")]
     public class HomeController : Controller
     {
+        [Route("Client")]
         [Route("Client/Index")]
         public IActionResult Index()
         {

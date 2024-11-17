@@ -107,8 +107,17 @@ public class AccountController(SignInManager<AppUser> signInManager, UserManager
             var result = await userManager.CreateAsync(user, model.Password!);
             if (result.Succeeded)
             {
+                var roleResult = await userManager.AddToRoleAsync(user, "Client");
+                if (!roleResult.Succeeded)
+                {
+                    foreach (var error in roleResult.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View(model); // Nếu lỗi, hiển thị lại form đăng ký
+                }
                 await signInManager.SignInAsync(user, false);
-                return RedirectToAction("Index", "Home");
+                return Redirect("/Client/Index");
             }
             foreach (var error in result.Errors)
             {
