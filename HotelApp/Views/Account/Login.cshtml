@@ -1,0 +1,44 @@
+﻿@model HotelApp.ViewModels.LoginVM
+
+
+    <div class="row justify-content-center align-items-center h-100" style="background-image: url('/images/banner1.jpg'); background-size: cover;">
+        <div class="col-md-4" style="margin:90px 0px;">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">ĐĂNG NHẬP</h2>
+                    <form method="post" asp-action="Login">
+                        <div class="mb-3">
+                            <label for="Email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="Email" name="Email" required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="Password" name="Password" required />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="RememberMe" name="RememberMe" />
+                            <label class="form-check-label" for="RememberMe">Remember Me</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+
+                    <p class="text-center mt-3">
+                        Don't have an account?
+                        <a href="@Url.Action("Register", "Account")">Register here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
