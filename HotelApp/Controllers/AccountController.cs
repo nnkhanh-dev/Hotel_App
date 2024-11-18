@@ -117,7 +117,7 @@ public class AccountController(SignInManager<AppUser> signInManager, UserManager
                     return View(model); // Nếu lỗi, hiển thị lại form đăng ký
                 }
                 await signInManager.SignInAsync(user, false);
-                return Redirect("/Client/Index");
+                return RedirectToAction("Index", "Home", new { area = "Client" });
             }
             foreach (var error in result.Errors)
             {

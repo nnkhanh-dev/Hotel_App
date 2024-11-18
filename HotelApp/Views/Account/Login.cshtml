@@ -14,23 +14,24 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="Password" class="form-label">Password</label>
+                            <label for="Password" class="form-label">Mật khẩu</label>
                             <input type="password" class="form-control" id="Password" name="Password" required />
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="RememberMe" name="RememberMe" />
-                            <label class="form-check-label" for="RememberMe">Remember Me</label>
+                            <label class="form-check-label" for="RememberMe">Lưu thông tin đăng nhập</label>
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    <button type="submit" class="btn w-100" style="background-color: black; color: white">Đăng nhập</button>
                     </form>
 
                     <p class="text-center mt-3">
-                        Don't have an account?
-                        <a href="@Url.Action("Register", "Account")">Register here</a>
+                        <a href="@Url.Action("Register", "Account")">Đăng ký ngay</a> |
+                        <a href="@Url.Action("ForgotPassword", "Account")">Quên mật khẩu</a>
                     </p>
+                    
                 </div>
             </div>
         </div>
