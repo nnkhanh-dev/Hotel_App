@@ -1,0 +1,25 @@
+﻿@model HotelApp.ViewModels.RoomVM
+
+<div class="room-detail">
+    <h2>@Model.TypeName - @Model.AreaName</h2>
+
+    <!-- Owl Carousel -->
+    <div id="carouselExampleIndicators" class="owl-carousel owl-theme">
+        @foreach (var imageUrl in Model.ImageUrls)
+        {
+            <div class="item">
+                <img src="@imageUrl" alt="Room Image" class="d-block w-100 img-fluid">
+            </div>
+        }
+    </div>
+    <h3><strong>Giá:</strong> @Model.Price VND - @Model.Discount</h3>
+
+    <h3><strong>Tiện nghi:</strong></h3>
+    <ul>
+        @foreach (var amenity in Model.AmenityNames)
+        {
+            <li class="btn btn-sm btn-primary">@amenity</li>
+        }
+    </ul>
+    <a href="@Url.Action("Login", "Account")" class="btn w-100  my-3" style="background-color: black; color: white;">Đặt ngay</a>
+</div>
