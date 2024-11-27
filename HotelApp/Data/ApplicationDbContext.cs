@@ -17,6 +17,8 @@ namespace HotelApp.Data
             public DbSet<Area> Areas { get; set; }
             public DbSet<Contact> Contacts { get; set; }
             public DbSet<AppUser> AppUsers { get; set; }
+            public DbSet<Booking> Bookings { get; set; }
+            public DbSet<CCCD> CCCDs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -68,6 +68,8 @@ namespace HotelApp.Areas.Client.Controllers
                 {
                     return RedirectToAction("Login", "Account");
                 }
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
                 user.FullName = model.FirstName + " " + model.LastName;
                 user.PhoneNumber = model.PhoneNumber;
                 var result = await _userManager.UpdateAsync(user);

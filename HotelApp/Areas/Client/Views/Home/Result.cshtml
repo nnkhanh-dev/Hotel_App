@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Kết quả";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="bi bi-check-circle text-success" style="font-size: 3rem;"></i>
+                        <i class="bi bi-exclamation-circle text-danger" style="font-size: 3rem;" style="display:none"></i>
+                    </div>
+                    <h1 class="card-title">@TempData["Message"]</h1>
+                    <h2 class="text-muted">
+                        Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.
+                    </h2>
+                    <a href="/Client/Index" class="btn btn-danger">Quay về trang chủ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

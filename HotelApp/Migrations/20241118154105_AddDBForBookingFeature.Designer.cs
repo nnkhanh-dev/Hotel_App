@@ -4,6 +4,7 @@ using HotelApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241118154105_AddDBForBookingFeature")]
+    partial class AddDBForBookingFeature
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -193,18 +196,12 @@ namespace HotelApp.Migrations
                     b.Property<DateTime>("CheckOut")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<decimal?>("Paid")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("PayType")
                         .IsRequired()
                         .HasColumnType("int");
-
-                    b.Property<string>("PaymentCode")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -450,13 +447,13 @@ namespace HotelApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "29c249ea-8692-4747-b001-f337244de35a",
+                            Id = "350dfdb1-0a14-42bd-ab57-a9855f151da4",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "69bb3e8b-f8ae-40f8-a543-783dde9f70ab",
+                            Id = "7bd05452-0d6f-4144-a0c2-1c04aac7f0ff",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });
@@ -626,7 +623,7 @@ namespace HotelApp.Migrations
             modelBuilder.Entity("HotelApp.Models.Image", b =>
                 {
                     b.HasOne("HotelApp.Models.Room", "Room")
-                        .WithMany("Images")
+                        .WithMany()
                         .HasForeignKey("RoomID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -702,11 +699,6 @@ namespace HotelApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("HotelApp.Models.Room", b =>
-                {
-                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

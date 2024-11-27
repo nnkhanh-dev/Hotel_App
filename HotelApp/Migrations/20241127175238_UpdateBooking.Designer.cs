@@ -4,6 +4,7 @@ using HotelApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241127175238_UpdateBooking")]
+    partial class UpdateBooking
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,15 +199,9 @@ namespace HotelApp.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal?>("Paid")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int?>("PayType")
                         .IsRequired()
                         .HasColumnType("int");
-
-                    b.Property<string>("PaymentCode")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -450,13 +447,13 @@ namespace HotelApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "29c249ea-8692-4747-b001-f337244de35a",
+                            Id = "5573275e-e552-4175-976f-24dc6d80ba3a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "69bb3e8b-f8ae-40f8-a543-783dde9f70ab",
+                            Id = "a770f3fc-f9e3-41eb-88a8-68f533f8496d",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });

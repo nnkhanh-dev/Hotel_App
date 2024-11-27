@@ -20,6 +20,7 @@ namespace HotelApp.Models
         public Area Area { get; set; }
 
         public ICollection<Amenity> Amenities { get; set; } = new List<Amenity>();
+        public ICollection<Image> Images { get; set; } = new List<Image>();
 
     }
 }
