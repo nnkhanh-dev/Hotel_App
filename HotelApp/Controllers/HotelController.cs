@@ -3,16 +3,23 @@ using HotelApp.Data;
 using Microsoft.AspNetCore.Mvc;
 using HotelApp.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace HotelApp.Controllers
 {
     public class HotelController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public HotelController(ApplicationDbContext context)
+        public HotelController(ApplicationDbContext context, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
         }
         public async Task<IActionResult> Index()
         {
@@ -123,7 +130,7 @@ namespace HotelApp.Controllers
         {
             // Lấy danh sách RoomID của các phòng đang bận
             var busyRoomIDs = _context.Bookings
-                .Where(b => b.Status != 3 && // Loại trừ trạng thái phòng "trống"
+                .Where(b => b.Status != 3 && b.Status != -100 &&// Loại trừ trạng thái phòng "trống"
                             (checkIn == null || checkOut == null || // Nếu không có ngày, bỏ qua điều kiện thời gian
                             (b.CheckIn <= checkOut && b.CheckOut >= checkIn))) // Điều kiện trùng thời gian
                 .Select(b => b.RoomID)
@@ -183,7 +190,10 @@ namespace HotelApp.Controllers
                     Status = r.Status,
                     StatusStr = r.Status == 0 ? "Đang hoạt động" : r.Status == 1 ? "Bảo trì" : "Dừng hoạt động",
                     ImageUrls = r.Images.Select(img => Url.Content(img.Path)).ToList(),
-                    AmenityNames = r.Amenities.Select(a => a.Name).ToList()
+                    AmenityNames = r.Amenities.Select(a => a.Name).ToList(),
+                    People = r.RoomType.People,
+                    Description = r.RoomType.Description,
+                    Total = r.Price - r.Discount * r.Price
                 }).FirstOrDefaultAsync();
             if(roomVM == null)
             {
@@ -192,6 +202,32 @@ namespace HotelApp.Controllers
 
             return PartialView("_RoomDetail", roomVM);
         }
-    
+        [Route("/Booking/{id}/{checkin}/{checkout}")]
+        public async Task<IActionResult> Booking(int id, DateTime checkin, DateTime checkout)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var roles = await _userManager.GetRolesAsync(user);
+
+                if (roles.Contains("Client"))
+                {
+                    // Định dạng lại checkin và checkout thành chuỗi ngày theo định dạng mong muốn
+                    string formattedCheckIn = checkin.ToString("yyyy-MM-dd");
+                    string formattedCheckOut = checkout.ToString("yyyy-MM-dd");
+
+                    // Tạo URL với các tham số đã định dạng
+                    string url = $"/Client/Booking/{id}/{formattedCheckIn}/{formattedCheckOut}";
+                    return Redirect(url);
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+            }
+            return RedirectToAction("Login", "Account");
+        }
+
+
     }
 }

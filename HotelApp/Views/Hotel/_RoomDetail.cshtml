@@ -12,14 +12,26 @@
             </div>
         }
     </div>
-    <h3><strong>Giá:</strong> @Model.Price VND - @Model.Discount</h3>
-
-    <h3><strong>Tiện nghi:</strong></h3>
+    <h5>@Model.Description</h5>
+    <h3>
+        Giá gốc:
+        <span style="text-decoration: line-through; color: gray;">
+            @Model.Price.ToString("N0") VND
+        </span>
+    </h3>
+    <h3>
+        Ưu đãi:
+        <span style="color: red; font-weight: bold;">
+            @Model.Total.ToString("N0") VND
+        </span>
+    </h3>
+    <h3>Số người tối đa: @Model.People</h3>
+    <h3>Tiện nghi:</h3>
     <ul>
         @foreach (var amenity in Model.AmenityNames)
         {
             <li class="btn btn-sm btn-primary">@amenity</li>
         }
     </ul>
-    <a href="@Url.Action("Login", "Account")" class="btn w-100  my-3" style="background-color: black; color: white;">Đặt ngay</a>
+    <button id="bookingBtn" data-roomid ="@Model.Id" class="btn w-100  my-3" style="background-color: black; color: white;">Đặt ngay</button>
 </div>

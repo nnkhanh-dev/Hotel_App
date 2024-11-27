@@ -7,48 +7,49 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using HotelApp.Areas.Client;
 
-namespace HotelApp.Controllers;
-
-public class AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager) : Controller
+namespace HotelApp.Controllers
 {
-    [Route("/login")]
-    [Route("/Account/Login")]
-   
-    public async Task<IActionResult> Login()
+
+    public class AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager) : Controller
     {
-        if (User.Identity.IsAuthenticated)
+        [Route("/login")]
+        [Route("/Account/Login")]
+
+        public async Task<IActionResult> Login()
         {
-            var user = await userManager.GetUserAsync(User);
-            var roles = await userManager.GetRolesAsync(user);
-            if (roles.Contains("Admin"))
+            if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
-            }
-            else
-            {
-                if (roles.Contains("Client"))
+                var user = await userManager.GetUserAsync(User);
+                var roles = await userManager.GetRolesAsync(user);
+                if (roles.Contains("Admin"))
                 {
-                    return RedirectToAction("Index", "Home", new { area = "Client" });
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                 }
                 else
-                    return RedirectToAction("index", "Hotel");
+                {
+                    if (roles.Contains("Client"))
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "Client" });
+                    }
+                    else
+                        return RedirectToAction("index", "Hotel");
+                }
             }
+            return View();
         }
-        return View();
-    }
 
-    [HttpPost]
-    [Route("/login")]
-    [Route("/Account/Login")]
-    public async Task<IActionResult> Login(LoginVM model)
-    {
-        if (ModelState.IsValid)
+        [HttpPost]
+        [Route("/login")]
+        [Route("/Account/Login")]
+        public async Task<IActionResult> Login(LoginVM model)
         {
-            var email = model.Email.Trim().ToUpperInvariant();
-            var user = await userManager.FindByEmailAsync(email);
-            if (user != null)
+            if (ModelState.IsValid)
             {
-               
+                var email = model.Email.Trim().ToUpperInvariant();
+                var user = await userManager.FindByEmailAsync(email);
+                if (user != null)
+                {
+
                     //login
                     var result = await signInManager.PasswordSignInAsync(email!, model.Password!, model.RememberMe, false);
 
@@ -60,7 +61,8 @@ public class AccountController(SignInManager<AppUser> signInManager, UserManager
                             return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                         }
                         else
-                        {   if(roles.Contains("Client"))
+                        {
+                            if (roles.Contains("Client"))
                             {
                                 return RedirectToAction("Index", "Home", new { area = "Client" });
                             }
@@ -74,69 +76,71 @@ public class AccountController(SignInManager<AppUser> signInManager, UserManager
                         ModelState.AddModelError("", "Đăng nhập thất bại!");
                     }
 
-              
-            }else
-            {
-                ModelState.AddModelError("", "Tài khoản không tồn tại!");
+
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Tài khoản không tồn tại!");
+                }
+                return View(model);
             }
             return View(model);
         }
-        return View(model);
-    }
 
-    public IActionResult Register()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Register(RegisterVM model)
-    {
-        if (ModelState.IsValid)
+        public IActionResult Register()
         {
-            
-            AppUser user = new AppUser();
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
-            user.FullName = model.LastName.Trim()+' '+model.FirstName;
-            user.UserName = model.Email.Trim();
-            user.Email = model.Email.Trim();
-            user.PhoneNumber = model.PhoneNumber.Trim();
-            user.NormalizedEmail = model.Email.Trim().ToUpperInvariant();
-            user.Password = model.Password.Trim();
-            var result = await userManager.CreateAsync(user, model.Password!);
-            if (result.Succeeded)
-            {
-                var roleResult = await userManager.AddToRoleAsync(user, "Client");
-                if (!roleResult.Succeeded)
-                {
-                    foreach (var error in roleResult.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                    return View(model); // Nếu lỗi, hiển thị lại form đăng ký
-                }
-                await signInManager.SignInAsync(user, false);
-                return RedirectToAction("Index", "Home", new { area = "Client" });
-            }
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error.Description);
-            }
+            return View();
         }
-        return View(model);
-    }
-    [Route("/dang-xuat")]
-    public async Task<IActionResult> Logout()
-    {
-        await signInManager.SignOutAsync();
-        return RedirectToAction("Index","Hotel");
-    }
-    [HttpGet]
-    [AllowAnonymous]
-    [Route("opps")]
-    public IActionResult AccessDenied()
-    {
-        return View();
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterVM model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                AppUser user = new AppUser();
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.FullName = model.LastName.Trim() + ' ' + model.FirstName;
+                user.UserName = model.Email.Trim();
+                user.Email = model.Email.Trim();
+                user.PhoneNumber = model.PhoneNumber.Trim();
+                user.NormalizedEmail = model.Email.Trim().ToUpperInvariant();
+                user.Password = model.Password.Trim();
+                var result = await userManager.CreateAsync(user, model.Password!);
+                if (result.Succeeded)
+                {
+                    var roleResult = await userManager.AddToRoleAsync(user, "Client");
+                    if (!roleResult.Succeeded)
+                    {
+                        foreach (var error in roleResult.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+                        return View(model); // Nếu lỗi, hiển thị lại form đăng ký
+                    }
+                    await signInManager.SignInAsync(user, false);
+                    return RedirectToAction("Index", "Home", new { area = "Client" });
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return View(model);
+        }
+        [Route("/dang-xuat")]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Hotel");
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("opps")]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }

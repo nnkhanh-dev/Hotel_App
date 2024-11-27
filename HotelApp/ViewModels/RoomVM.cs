@@ -17,5 +17,8 @@ namespace HotelApp.ViewModels
         public string StatusStr { get; set; }
         public List<string> ImageUrls { get; set; } 
         public List<string> AmenityNames { get; set; } 
+        public int People {  get; set; }
+        public string Description { get; set; }
+        public decimal Total { get; set; }
     }
 }
