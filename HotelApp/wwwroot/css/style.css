@@ -297,10 +297,20 @@ header {
     z-index:9999;
 }
 .header {
+<<<<<<< HEAD
 
     width: 100%;
     padding: 15px 0px 15px 0px;
     background: #fff;
+=======
+    width: 100%;
+    padding: 15px 0px 15px 0px;
+    background: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng bóng mờ */
+    z-index: 10; /* Đảm bảo header hiển thị ở trên các phần tử khác */
+    
+
+>>>>>>> master
 }
 
 
@@ -308,6 +318,7 @@ header {
 
 .banner_main {
      position: relative;
+     padding: 10rem 0rem;
 }
 
 .banner .carousel-indicators li {
@@ -321,79 +332,14 @@ header {
      background-color: #fe0000;
 }
 
-.booking_ocline {
-     position: absolute;
-     width: 100%;
-     top: 50%;
-     transform: translateY(-50%);
-}
-
-.book_room {
-     background-color: #000000c7;
-     padding: 30px 35px;
-     border-left: #ff0909 solid 5px;
-}
-
-.book_room h1 {
-     font-weight: 500;
-     font-size: 30px;
-     line-height: 30px;
-     color: #fff;
-     padding-bottom: 20px;
-     text-transform: uppercase;
-     text-align: center;
-}
-
-.book_now span {
-     display: block;
-     color: #fff;
-     font-size: 18px;
-     padding-bottom: 5px;
-}
-
-.book_now .online_book {
-     width: 100%;
-     height: 50px;
-     border: #fff solid 1px;
-     background-color: transparent;
-     color: #fff;
-     padding: 0 10px;
-     padding-right: 61px;
-     margin-bottom: 25px;
-     position: relative;
-}
-
-.date_cua {
-     position: absolute;
-     width: 29px;
-     height: 29px;
-     top: 48px;
-     background-repeat: no-repeat;
-     right: 30px;
-}
-
-.book_btn {
-     background-color: #fe0000;
-     max-width: 189px;
-     width: 100%;
-     margin: 0 auto;
-     padding: 10px 0;
-     border-radius: 50px;
-     color: #fff;
-     font-size: 20px;
-     transition: ease-in 0.5s;
-     display: block;
-}
-
-.book_btn:hover {
-     background-color: #fff;
-     color: #fe0000;
-     transition: ease-in 0.5s;
+.banner_main {
+    background-image: url('/images/banner1.jpg');
+    background-size: cover;
 }
 
 .carousel-control-next,
 .carousel-control-prev {
-     display: none;
+    display: none;
 }
 
 .carousel-indicators {

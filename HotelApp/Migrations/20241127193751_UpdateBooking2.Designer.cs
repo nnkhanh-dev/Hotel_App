@@ -4,6 +4,7 @@ using HotelApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241127193751_UpdateBooking2")]
+    partial class UpdateBooking2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,9 +84,6 @@ namespace HotelApp.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
-
-                    b.Property<string>("AvatarUrl")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -205,9 +205,6 @@ namespace HotelApp.Migrations
                     b.Property<int?>("PayType")
                         .IsRequired()
                         .HasColumnType("int");
-
-                    b.Property<string>("PaymentCode")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -453,13 +450,13 @@ namespace HotelApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cafe9e3b-0416-4aff-82ff-6c4f2eff612c",
+                            Id = "8b4a45dd-f2b1-4cb5-a7f9-7c35b2ce2b50",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "aaff6d55-adb3-416d-a5c3-270827f27b09",
+                            Id = "bff503d0-2eb3-4d41-8ed0-44d4e4c38c27",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });

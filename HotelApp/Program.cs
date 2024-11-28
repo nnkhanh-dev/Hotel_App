@@ -1,3 +1,4 @@
+using HotelApp.Areas.Client.Services;
 using HotelApp.Data;
 using HotelApp.Models;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +20,9 @@ builder.Services.AddIdentity<AppUser,IdentityRole>(options =>
 ).AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders()
 .AddDefaultUI();
+
+
+builder.Services.AddScoped<IVNPayService, VNPayService>();
 
 builder.Services.AddControllersWithViews();
 

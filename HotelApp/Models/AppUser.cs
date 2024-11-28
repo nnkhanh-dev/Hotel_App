@@ -23,6 +23,7 @@ namespace HotelApp.Models
         public string PhoneNumber {  get; set; }
         [Required]
         public string Password { get; set; }
+        public string? AvatarUrl { get; set; }
 
     }
 }

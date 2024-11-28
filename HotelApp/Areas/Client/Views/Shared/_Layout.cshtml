@@ -20,8 +20,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="~/css/slider.css">
-    <link rel="icon" href="~/images/fevicon.png" type="image/gif" />
 </head>
 <body>
     <header>
@@ -43,17 +43,20 @@
                                 <!-- Sử dụng flexbox cho navbar-collapse -->
                                 <ul class="navbar-nav pl-0">
                                     <!-- Các thẻ <li> nằm sát lề trái -->
-                                    <li class="nav-item active">
+                                    <li class="nav-item">
                                         <a class="nav-link" href="@Url.Action("Index", "Home")">Trang chủ</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="room.html">Phòng</a>
+                                        <a class="nav-link" href="@Url.Action("TypePage", "Home")">Phòng</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="blog.html">Ưu đãi</a>
+                                        <a class="nav-link" href="@Url.Action("VoucherPage", "Home")">Ưu đãi</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="contact.html">Liên hệ</a>
+                                        <a class="nav-link" href="@Url.Action("ContactPage", "Home")">Liên hệ</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Rooms", "Home")">Đặt phòng</a>
                                     </li>
                                 </ul>
                                 <div class="d-flex align-items-center">
@@ -63,7 +66,7 @@
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu">
                                             <li><a class="dropdown-item" href="/Account/Profile">Quản lý tài khoản</a></li>
-                                            <li><a class="dropdown-item" href="/Account/Edit">Quản lý đơn đặt phòng</a></li>
+                                            <li><a class="dropdown-item" href="/Client/BookingList">Quản lý đơn đặt phòng</a></li>
                                             <li><a class="dropdown-item" href="/dang-xuat">Đăng xuất</a></li>
                                         </ul>
                                     </li>
@@ -84,30 +87,25 @@
             <div class="container">
                 <div class="row">
                     <div class=" col-md-4">
-                        <h3>Contact US</h3>
+                        <h3>Liên hệ chúng tôi</h3>
                         <ul class="conta">
-                            <li><i class="fa fa-map-marker" aria-hidden="true"></i> Address</li>
-                            <li><i class="fa fa-mobile" aria-hidden="true"></i> +01 1234569540</li>
-                            <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> demo@gmail.com</a></li>
+                            <li><i class="fa fa-map-marker" aria-hidden="true"></i>48 Cao Thắng, Hải Châu, Đà Nẵng, Việt Nam</li>
+                            <li><i class="fa fa-mobile" aria-hidden="true"></i>0898866467</li>
+                            <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> nguyennhatkhanh151203@gmail.com</a></li>
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <h3>Menu Link</h3>
+                        <h3>Nội dung</h3>
                         <ul class="link_menu">
-                            <li class="active"><a href="#">Trang chủ</a></li>
-                            <li><a href="about.html"> about</a></li>
-                            <li><a href="room.html">Our Room</a></li>
-                            <li><a href="gallery.html">Gallery</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                            <li><a href="@Url.Action("TypePage", "Home")"> Phòng</a></li>
+                            <li><a href="@Url.Action("VoucherPage", "Home")">Ưu đãi</a></li>
+                            <li><a href="@Url.Action("ContactPage", "Home")">Liên hệ</a></li>
+                            <li><a href="@Url.Action("Rooms", "Home")">Đặt phòng</a></li>
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <h3>News letter</h3>
-                        <form class="bottom_form">
-                            <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
-                            <button class="sub_btn">subscribe</button>
-                        </form>
+                        <h3>Mạng xã hội</h3>
                         <ul class="social_icon">
                             <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -127,11 +125,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="~/js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="~/js/custom.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="~/loaddata/loadroomtypes.js"></script>
     <script src="~/loaddata/loadvouchers.js"></script>
-
+    <script src="~/loadData/LoadListRoom.js"></script>
+    <script src="~/loadData/LoadAmenities.js"></script>
+    <script src="~/loadData/LoadAreas.js"></script>
+    <script src="~/loadData/LoadBooking.js"></script>
     <!-- Thông báo -->
     <script>
         $(document).ready(function () {
@@ -143,7 +143,7 @@
         {
             <text>toastr.error("@TempData["ErrorMessage"]");</text>
         }
-                });
+                        });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
