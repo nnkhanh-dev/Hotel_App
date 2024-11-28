@@ -53,14 +53,15 @@ namespace HotelApp.Areas.Client.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
-                PhoneNumber = user.PhoneNumber
+                PhoneNumber = user.PhoneNumber,
+                AvatarUrl = user.AvatarUrl
             };
             return View(profile);
         }
 
         [HttpPost]
         [Route("Account/Edit")]
-        public async Task<IActionResult> Edit(ProfileVM model, IFormFile Avatar)
+        public async Task<IActionResult> Edit(ProfileVM model, IFormFile Avatar = null)
         {
             if (ModelState.IsValid)
             {
