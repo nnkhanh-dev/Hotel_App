@@ -19,16 +19,17 @@ public class AccountController(SignInManager<AppUser> signInManager, UserManager
         if (User.Identity.IsAuthenticated)
         {
             var user = await userManager.GetUserAsync(User);
+
             var roles = await userManager.GetRolesAsync(user);
             if (roles.Contains("Admin"))
             {
-                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
             else
             {
                 if (roles.Contains("Client"))
                 {
-                    return RedirectToAction("Index", "Home", new { area = "Client" });
+                    return RedirectToAction("Dashboard", "Home", new { area = "Client" });
                 }
                 else
                     return RedirectToAction("index", "Hotel");
@@ -57,7 +58,7 @@ public class AccountController(SignInManager<AppUser> signInManager, UserManager
                         var roles = await userManager.GetRolesAsync(user);
                         if (roles.Contains("Admin"))
                         {
-                            return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                            return RedirectToAction("Index", "Home", new { area = "Admin" });
                         }
                         else
                         {   if(roles.Contains("Client"))

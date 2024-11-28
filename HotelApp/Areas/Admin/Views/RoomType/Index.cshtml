@@ -1,0 +1,34 @@
+﻿@model List<RoomType>
+
+<div class="container-fluid d-flex justify-content-center align-items-center" style="background-image: url('/images/banner1.jpg'); background-size: cover; padding: 50px 0px;">
+    <div class="card shadow-lg container p-5">
+        <div class="titlepage">
+            <h2>Quản lý loại phòng</h2>
+        </div>
+        <button class="btn btn-primary" style="width: 200px;" onclick="location.href='@Url.Action("Create","RoomType")'">Thêm loại phòng</button>
+        <table id="studentTable" class="table table-striped">
+        <tr>
+            <th>ID Loại phòng</th>
+            <th>Tên Phòng</th>
+            <th>Mô tả</th>
+            <th>Số lượng người</th>
+            <th>Ảnh</th>
+            <th colspan="3" class="text-center">Chức năng</th>
+        </tr>
+        
+            @foreach (var item in Model){
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.People</td>
+                    <td><img src="@item.ImagePath" width="100" height="80"></td>
+                    <td><button type="button" class="btn btn-info">Xem</button></td>
+                    <td><button type="button" class="btn btn-warning">Sửa</button></td>
+                    <td><button type="button" class="btn btn-danger">Xóa</button></td>
+                </tr>
+            }
+
+    </table>
+</div>
+</div>

@@ -29,9 +29,9 @@
             <div class="container">
                 <div class="row">
                     <!-- Logo section -->
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 logo_section d-flex justify-content-center align-items-center">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 logo_section d-flex justify-content-center align-items-center">
                         <h1 class="m-0 p-0" style="font-size:36px; white-space: nowrap;">
-                            <span style="color:red;">UTE</span>Hotel
+                            <span style="color:red;">Quản </span>lý
                         </h1>
                     </div>
                     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 d-flex justify-content-between">
@@ -44,22 +44,35 @@
                                 <ul class="navbar-nav pl-0">
                                     <!-- Các thẻ <li> nằm sát lề trái -->
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="@Url.Action("Index", "Hotel")">Trang chủ</a>
+                                        <a class="nav-link" href="@Url.Action("Index", "Home")">Trang chủ</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#Phong">Phòng</a>
+                                        <a class="nav-link" href="@Url.Action("Index", "Area")">QL khu vực</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#UuDai">Ưu đãi</a>
+                                        <a class="nav-link" href="@Url.Action("Index", "RoomType")">QL loại phòng</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#LienHe">Liên hệ</a>
+                                        <a class="nav-link" href="@Url.Action("Index", "Room")">QL phòng</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Index", "Amenity")">QL Tiện nghi</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Index", "Image")">QL ảnh</a>
                                     </li>
                                 </ul>
                                 <div class="d-flex align-items-center">
-                                    <!-- Các nút đăng nhập và đăng ký nằm bên phải -->
-                                    <a href="/Account/Login" class="btn mx-2" style="background-color: black; color: white">Login</a>
-                                    <a href="/Account/Register" class="btn mx-2" style="border: 1px solid black; color: black">Register</a>
+                                    <li class="nav-item dropdown">
+                                        <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Quản lý
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu">
+                                            <li><a class="dropdown-item" href="/Account/Profile">Quản lý tài khoản</a></li>
+                                            <li><a class="dropdown-item" href="/Account/Edit">Quản lý đơn đặt phòng</a></li>
+                                            <li><a class="dropdown-item" href="/dang-xuat">Đăng xuất</a></li>
+                                        </ul>
+                                    </li>
                                 </div>
                             </div>
                         </nav>
@@ -77,25 +90,30 @@
             <div class="container">
                 <div class="row">
                     <div class=" col-md-4">
-                        <h3>Liên hệ chúng tôi</h3>
+                        <h3>Contact US</h3>
                         <ul class="conta">
-                            <li><i class="fa fa-map-marker" aria-hidden="true"></i>48 Cao Thắng, Hải Châu, Đà Nẵng, Việt Nam</li>
-                            <li><i class="fa fa-mobile" aria-hidden="true"></i>0898866467</li>
-                            <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> nguyennhatkhanh151203@gmail.com</a></li>
+                            <li><i class="fa fa-map-marker" aria-hidden="true"></i> Address</li>
+                            <li><i class="fa fa-mobile" aria-hidden="true"></i> +01 1234569540</li>
+                            <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> demo@gmail.com</a></li>
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <h3>Nội dung</h3>
+                        <h3>Menu Link</h3>
                         <ul class="link_menu">
                             <li class="active"><a href="#">Trang chủ</a></li>
-                            <li><a href="about.html"> Phòng</a></li>
-                            <li><a href="room.html">Ưu đãi</a></li>
-                            <li><a href="gallery.html">Liên hệ</a></li>
-                            <li><a href="blog.html">Đặt phòng</a></li>
+                            <li><a href="about.html"> about</a></li>
+                            <li><a href="room.html">Our Room</a></li>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <h3>Mạng xã hội</h3>
+                        <h3>News letter</h3>
+                        <form class="bottom_form">
+                            <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
+                            <button class="sub_btn">subscribe</button>
+                        </form>
                         <ul class="social_icon">
                             <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -131,7 +149,7 @@
         {
             <text>toastr.error("@TempData["ErrorMessage"]");</text>
         }
-                        });
+                });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -291,11 +291,16 @@ button {
 .navbar-expand-md .navbar-nav {
      padding-right: 10px;
 }
-
+header {
+    position: sticky;
+    top: 0;
+    z-index:9999;
+}
 .header {
-     width: 100%;
-     padding: 15px 0px 15px 0px;
-     background: #fff;
+
+    width: 100%;
+    padding: 15px 0px 15px 0px;
+    background: #fff;
 }
 
 
@@ -508,7 +513,8 @@ button {
 
 .our_room {
      background-color: #f4f5f7;
-     padding: 90px 0 60px 0;
+     margin-top:-100px;
+     padding: 190px 0 60px 0;
 }
 
 .our_room .titlepage {
@@ -611,7 +617,7 @@ button {
      background: url(../images/blog_bg.jpg);
      background-repeat: no-repeat;
      background-size: 100% 100%;
-     padding: 90px 0 60px 0;
+     padding: 190px 0 60px 0;
 }
 
 .voucher .titlepage {
@@ -687,8 +693,8 @@ button {
 /** contact section **/
 
 .contact {
-     background: #fff;
-     margin: 90px 0px;
+     background: #fff ;
+     padding: 190px 0px;
 }
 
 .main_form .contactus {
