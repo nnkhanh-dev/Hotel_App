@@ -14,7 +14,7 @@
         </div>
 
         <!-- Form -->
-        <form asp-action="Edit" method="post">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Cập nhật thông tin</h2>
 
@@ -34,6 +34,12 @@
                 <div class="mb-3">
                     <label for="PhoneNumber" class="form-label">Số điện thoại</label>
                     <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber">
+                </div>
+
+                <!-- Avatar Upload -->
+                <div class="mb-3">
+                    <label for="Avatar" class="form-label">Avatar</label>
+                    <input type="file" class="form-control" id="Avatar" name="Avatar">
                 </div>
             </div>
 

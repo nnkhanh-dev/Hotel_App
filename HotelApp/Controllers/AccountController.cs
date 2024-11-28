@@ -107,6 +107,7 @@ namespace HotelApp.Controllers
                 user.PhoneNumber = model.PhoneNumber.Trim();
                 user.NormalizedEmail = model.Email.Trim().ToUpperInvariant();
                 user.Password = model.Password.Trim();
+                user.AvatarUrl = "~/upload/15122003basicavatar.png";
                 var result = await userManager.CreateAsync(user, model.Password!);
                 if (result.Succeeded)
                 {

@@ -34,7 +34,8 @@ namespace HotelApp.Areas.Client.Controllers
             {
                 FullName = user.FullName,
                 Email = user.Email,
-                PhoneNumber = user.PhoneNumber
+                PhoneNumber = user.PhoneNumber,
+                AvatarUrl = Url.Content(user.AvatarUrl)
             }; 
             return View(profile);
         }
@@ -59,19 +60,41 @@ namespace HotelApp.Areas.Client.Controllers
 
         [HttpPost]
         [Route("Account/Edit")]
-        public async Task<IActionResult> Edit(ProfileVM model)
+        public async Task<IActionResult> Edit(ProfileVM model, IFormFile Avatar)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
                 if (user == null)
                 {
                     return RedirectToAction("Login", "Account");
                 }
+
+                // Cập nhật thông tin người dùng
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
                 user.FullName = model.FirstName + " " + model.LastName;
                 user.PhoneNumber = model.PhoneNumber;
+
+                // Xử lý tải lên avatar
+                if (Avatar != null && Avatar.Length > 0)
+                {
+                    // Tạo tên tệp mới với tiền tố là ticks
+                    var fileExtension = Path.GetExtension(Avatar.FileName); // Lấy phần mở rộng của tệp
+                    var fileName = DateTime.Now.Ticks.ToString()+ Avatar.FileName + fileExtension; // Dùng ticks làm tiền tố
+
+                    // Lưu avatar vào thư mục trên server
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "upload", fileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await Avatar.CopyToAsync(stream);
+                    }
+
+                    // Cập nhật URL của avatar
+                    user.AvatarUrl = "~/upload/" + fileName;
+                }
+
+                // Cập nhật thông tin người dùng trong cơ sở dữ liệu
                 var result = await _userManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
@@ -79,9 +102,11 @@ namespace HotelApp.Areas.Client.Controllers
                     return RedirectToAction("Profile");
                 }
             }
-            
+
             return View(model);
         }
+
+
 
         [Route("Account/ChangePassword")]
         public async Task<IActionResult> ChangePassword()
