@@ -1,0 +1,15 @@
+﻿@model HotelApp.Models.Amenity
+
+
+<div class="layout-demo-wrapper">
+    <div class="card shadow-lg container p-5">
+        <div class="titlepage">
+            <h2>Chi tiết tiện ích</h2>
+        </div>
+        <h3><strong>Id tiện ích:</strong> @Model.Id</h3>
+        <h3><strong>Tên tiện ích:</strong> @Model.Name</h3>
+        <h3><strong>Mô tả:</strong> @Model.Description</h3>
+
+        <a href="@Url.Action("Index", "Amenity")" class="btn btn-secondary m-5">Quay lại</a>
+    </div>
+</div>

@@ -101,6 +101,12 @@ namespace HotelApp.Controllers
             var areas = _context.Areas.ToList();
             return Json(new { Data = areas });
         }
+        [Route("/TrangThai")]
+        public IActionResult TrangThai()
+        {
+            var areas = _context.Areas.ToList();
+            return Json(new { Data = areas });
+        }
         [HttpPost]
         [Route("/Hotel/Contact")]
         public IActionResult Contact(Contact contact)

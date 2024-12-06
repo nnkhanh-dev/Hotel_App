@@ -19,12 +19,17 @@ namespace HotelApp.Areas.Admin.Controllers
             _context = context;
         }
 
-        [Route("Admin")]
-        [Route("Amenity/Index")]
-        public async Task<IActionResult> Index()
+        [Route("Manage/Amenity/Index")]
+        public IActionResult Index()
         {
-            var areas = await _context.Amenities.ToListAsync();
-            return View(areas);
+            return View();
+        }
+
+        [Route("Amenity/ListAmenity")]
+        public async Task<IActionResult> ListAmenity()
+        {
+            var amenities = await _context.Amenities.ToListAsync();
+            return Json(new { Data = amenities });
         }
 
         [Route("Amenity/Create")]
@@ -50,22 +55,60 @@ namespace HotelApp.Areas.Admin.Controllers
             }
             return View(amenity);
         }
+        [HttpGet]
+        [Route("Amenity/Details/{id}")]
+        public async Task<IActionResult> Details(int id)
+        {
+            var amenity = await _context.Amenities.FindAsync(id);
+            if (amenity == null)
+            {
+                return NotFound();
+            }
+            return View(amenity);
+        }
+        [HttpGet]
+        [Route("Amenity/Edit/{id}")]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var amenity = await _context.Amenities.FindAsync(id);
+            if (amenity == null)
+            {
+                return NotFound();
+            }
+            return View(amenity);
+        }
 
         [HttpPost]
-        [Route("Amenity/Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Amenity/Edit/{id}")]
+        public async Task<IActionResult> Edit(Amenity model)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Amenities.Update(model);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("Amenity/Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var amenity = await _context.Amenities.FindAsync(id);
             if (amenity == null)
             {
-                return NotFound(); // Nếu không tìm thấy khu vực
+                return NotFound(); // Nếu khu vực không tồn tại
             }
 
-            _context.Amenities.Remove(amenity); // Xóa khu vực
-            await _context.SaveChangesAsync(); // Lưu thay đổi vào database
+            _context.Amenities.Remove(amenity);
+            await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index"); // Quay lại danh sách
+            return Json(new { success = true }); // Trả về JSON thành công cho AJAX
         }
+
+
     }
 }

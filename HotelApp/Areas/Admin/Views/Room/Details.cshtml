@@ -1,0 +1,65 @@
+﻿@model HotelApp.Areas.Admin.ViewModels.RoomDetailsVM
+
+<div class="layout-demo-wrapper">
+    <div class="card shadow-lg container p-5">
+        <div class="container">
+            <div class="titlepage">
+                <h2>Chi tiết phòng</h2>
+            </div>
+            <div id="carouselExampleIndicators" class="owl-carousel owl-theme">
+                @foreach (var imageUrl in Model.Images)
+                {
+                    <div class="item" >
+                        <img src="@imageUrl.Path" alt="Room Image" style="height: 200px;object-fit:fill;">
+                    </div>
+                }
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Loại phòng:</th>
+                    <td>@Model.RoomTypeName</td>
+                </tr>
+                <tr>
+                    <th>Khu vực:</th>
+                    <td>@Model.AreaName</td>
+                </tr>
+                <tr>
+                    <th>Giá:</th>
+                    <td>@Model.Price.ToString("C0", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"))</td>
+                </tr>
+                <tr>
+                    <th>Giảm giá:</th>
+                    <td>@Model.Discount</td>
+                </tr>
+                <tr>
+                    <th>Tổng tiền:</th>
+                    <td style="font-weight: bold; font-size: 16px; color: red;">@((@Model.Price - @Model.Price * @Model.Discount).ToString("C0", System.Globalization.CultureInfo.GetCultureInfo("vi-VN")))</td>
+                </tr>
+                <tr>
+                    <th>Trạng thái:</th>
+                    <td>
+                        @foreach (var status in (IEnumerable<SelectListItem>)ViewData["Statuses"])
+                        {
+                            if (status.Value == Model.Status.ToString())
+                            {
+                                @status.Text
+                            }
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th>Tiện ích:</th>
+                    <td>
+                    @foreach (var amenity in Model.Amenities)
+                    {
+
+                            <span class="badge bg-primary">@amenity</span>
+                    }
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+</div>

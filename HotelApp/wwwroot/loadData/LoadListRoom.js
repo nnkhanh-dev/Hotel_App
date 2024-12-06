@@ -133,7 +133,6 @@ function Detail(url) {
                 }
             });
             $('#roomDetailModal').modal('show');
-          
             $('#bookingBtn').click(function () {
                 const checkIn = $('#CheckIn').val();
                 const checkOut = $('#CheckOut').val();
@@ -145,7 +144,6 @@ function Detail(url) {
                     window.location.href = `Booking/${roomId}/${checkIn}/${checkOut}`;
                 }
             });
-
         },
         error: function (xhr, status, error) {
             // Hiển thị lỗi chi tiết

@@ -4,6 +4,7 @@ using HotelApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using HotelApp.Areas.Client.ViewModels;
 
 namespace HotelApp.Areas.Admin.Controllers
 {
@@ -17,16 +18,23 @@ namespace HotelApp.Areas.Admin.Controllers
             _context = context;
         }
 
-        [Route("Admin")]
-        [Route("Area/Index")]
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        [Route("Area/ListArea")]
+        public async Task<IActionResult> ListArea()
         {
             var areas = await _context.Areas.ToListAsync();
-            return View(areas);
+            return Json(new { Data = areas });
         }
 
+        [Route("Manage/Area/Index")]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+
         [Route("Area/Create")]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -48,21 +56,60 @@ namespace HotelApp.Areas.Admin.Controllers
             return View(area);
         }
 
+        [HttpGet]
+        [Route("Area/Details/{id}")]
+        public async Task<IActionResult> Details(int id)
+        {
+            var area = await _context.Areas.FindAsync(id);
+            if (area == null)
+            {
+                return NotFound();
+            }
+            return View(area);
+        }
+        [HttpGet]
+        [Route("Area/Edit/{id}")]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var area = await _context.Areas.FindAsync(id);
+            if (area == null)
+            {
+                return NotFound();
+            }
+            return View(area);
+        }
+
         [HttpPost]
-        [Route("Area/Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Area/Edit/{id}")]
+        public async Task<IActionResult> Edit(Area model)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Areas.Update(model);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("Area/Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var area = await _context.Areas.FindAsync(id);
             if (area == null)
             {
-                return NotFound(); // Nếu không tìm thấy khu vực
+                return NotFound(); // Nếu khu vực không tồn tại
             }
 
-            _context.Areas.Remove(area); // Xóa khu vực
-            await _context.SaveChangesAsync(); // Lưu thay đổi vào database
+            _context.Areas.Remove(area);
+            await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index"); // Quay lại danh sách
+            return Json(new { success = true }); // Trả về JSON thành công cho AJAX
         }
+
+
     }
 }

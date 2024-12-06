@@ -1,0 +1,20 @@
+﻿@model HotelApp.Models.Area
+
+<div class="layout-demo-wrapper">
+    <div class="card shadow-lg container p-5">
+        <div class="titlepage">
+            <h2>Sửa Khu vực</h2>
+        </div>
+        <form asp-action="Edit" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group mb-5">
+                <label for="Name">Tên khu vực:</label>
+                <input type="text" class="form-control" asp-for="Name" required />
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <button type="submit" class="btn btn-primary">Lưu</button>
+            <a href="@Url.Action("Index", "Area")" class="btn btn-secondary">Hủy</a>
+        </form>
+    </div>
+</div>

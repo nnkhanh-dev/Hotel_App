@@ -899,5 +899,53 @@ line-height: 35px;
 }
 
 
+.carousel-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    width: 100%; /* Chiều rộng của vùng hiển thị ảnh */
+}
+
+.image-item {
+    flex-shrink: 0;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 150px; /* Chiều rộng mỗi ảnh */
+}
+
+.carousel-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 18px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .carousel-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .carousel-btn:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+    }
 
 

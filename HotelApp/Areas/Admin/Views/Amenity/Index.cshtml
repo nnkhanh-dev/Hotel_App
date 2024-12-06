@@ -1,35 +1,24 @@
 ﻿@model List<Amenity>
 
-<div class="container-fluid d-flex justify-content-center align-items-center" style="background-image: url('/images/banner1.jpg'); background-size: cover; padding: 50px 0px;">
+<div class="layout-demo-wrapper">
     <div class="card shadow-lg container p-5">
         <div class="titlepage">
-            <h2>Quản lý tiện nghi</h2>
+            <h2>Quản lý tiện ích</h2>
         </div>
-        <button class="btn btn-primary" style="width: 200px;" onclick="location.href='@Url.Action("Create","Amenity")'">Thêm khu vực</button>
-        <table id="studentTable" class="table table-striped">
-        <tr>
-            <th>ID tiện nghi</th>
-            <th>Tên tiện nghi</th>
-            <th>Mô tả</th>
-            <th colspan="3" class="text-center">Chức năng</th>
-        </tr>
-        
-        @foreach (var item in Model){
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Description</td>
-                <td><button type="button" class="btn btn-info">Xem</button></td>
-                <td><button type="button" class="btn btn-warning">Sửa</button></td>
-                <td>
-                        <form asp-action="Delete" method="post">
-                        @Html.AntiForgeryToken()
-                            <input type="hidden" name="Id" value="@item.Id" />
-                        <button type="submit" class="btn btn-danger">Xóa</button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </table>
+        <button class="btn btn-primary mb-4" style="width: 200px;" onclick="location.href='@Url.Action("Create","Amenity")'">Thêm tiện ich</button>
+
+        <table id="AmenityTableAdmin" class="table table-striped table-bordered mt-5" style="width:100%">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID tiện ích</th>
+                    <th>Tên tiện ích</th>
+                    <th>Mô tả</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
-</div>
+<form>
+    @Html.AntiForgeryToken() <!-- Tạo trường input chứa token -->
+</form>

@@ -23,6 +23,7 @@ namespace HotelApp.Areas.Client.Controllers
         {
             return View();
         }
+        [HttpGet]
         [Route("Account/Profile")]
         public async Task<IActionResult> Profile()
         {
@@ -39,7 +40,7 @@ namespace HotelApp.Areas.Client.Controllers
             }; 
             return View(profile);
         }
-
+        [HttpGet]
         [Route("Account/Edit")]
         public async Task<IActionResult> Edit()
         {
@@ -108,7 +109,7 @@ namespace HotelApp.Areas.Client.Controllers
         }
 
 
-
+        [HttpGet]
         [Route("Account/ChangePassword")]
         public async Task<IActionResult> ChangePassword()
         {
