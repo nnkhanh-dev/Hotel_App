@@ -8,7 +8,6 @@
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
         public int Status { get; set; }
-        public bool DaDatPhong { get; set; } // True nếu phòng đã được đặt (có trong Bookings)
     }
 
 }

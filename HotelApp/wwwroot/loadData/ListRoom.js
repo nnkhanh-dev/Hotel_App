@@ -7,17 +7,17 @@
         },
         columns: [
             {
-                data: 'id', // ID khu vực
+                data: 'id' // ID khu vực
             },
             {
-                data: 'roomTypeName',
+                data: 'roomTypeName'
             },
             {
-                data: 'areaName', 
+                data: 'areaName',
             },
             {
                 data: 'price', 
-                render: (data) => new Intl.NumberFormat('vi-VN').format(data) + " VNĐ",
+                render: (data) => new Intl.NumberFormat('vi-VN').format(data) + " VNĐ"
             },
             {
                 data: 'discount',
@@ -25,21 +25,8 @@
             },
             {
                 data: 'status',
-                render: (data) => data == 0 ? 'Chờ nhận' :
-                    data == 1 ? 'Đang sử dụng' :
-                        data == 2 ? 'Chờ thanh toán' :
-                            data == 3 ? 'Hoàn thành' :
-                                data == -1 ? 'Đã hủy' : 'Không xác định',
-            },
-            {
-                data: 'daDatPhong',
-                render: (data) => {
-                    if (data) {
-                        return `<span style="font-weight: bold; font-size: 16px; color: red;">Đã đặt</span>`;
-                    } else {
-                        return `<span style="font-weight: bold; font-size: 16px; color: green;">Trống</span>`;
-                    }
-                }
+                render: (data) => data == 0 ? 'Hoạt dộng' :
+                                data == -1 ? 'Bảo trì' : 'Ngưng hoạt động'
             },
             {
                 data: 'id', // Chức năng (nút)
@@ -47,7 +34,7 @@
                     <a href="/Room/Details/${data}" class="btn btn-info btn-sm">Xem</a>
                     <a href="/Room/Edit/${data}" class="btn btn-warning btn-sm">Sửa</a>
                     <button onClick="DeleteRoom(${data})" class="btn btn-danger btn-sm">Xóa</button>
-                `,
+                `
             }
         ],
         columnDefs: [
@@ -57,8 +44,7 @@
             { width: "15%", targets: 3 },
             { width: "10%", targets: 4 },
             { width: "15%", targets: 5 },
-            { width: "10%", targets: 6 },
-            { width: "20%", targets: 7 }
+            { width: "20%", targets: 6 }
         ]
     });
 });

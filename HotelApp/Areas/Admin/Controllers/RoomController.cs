@@ -39,11 +39,10 @@ namespace HotelApp.Areas.Admin.Controllers
                 AreaName = r.Area.Name,
                 Price = r.Price,
                 Discount = r.Discount,
-                Status = r.Status,
-                DaDatPhong = _context.Bookings.Any(b => b.RoomID == r.Id) // Kiểm tra phòng đã được đặt chưa
+                Status = r.Status
             })
             .ToListAsync();
-
+            
             return Json(new { Data = rooms });
         }
 [HttpGet]
