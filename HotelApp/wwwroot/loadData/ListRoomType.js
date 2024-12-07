@@ -7,7 +7,8 @@
         },
         columns: [
             {
-                data: 'id', // ID khu vực
+                data: null, // Sử dụng null để cho phép DataTable tự động tạo số thứ tự
+                render: (data, type, row, meta) => meta.row + 1, // meta.row bắt đầu từ 0
             },
             {
                 data: 'name', // Tên khu vực

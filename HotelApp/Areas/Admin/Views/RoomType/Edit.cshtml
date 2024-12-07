@@ -1,30 +1,38 @@
 ﻿@model HotelApp.Models.RoomType
 
 <div class="layout-demo-wrapper">
-    <div class="card shadow-lg container p-5">
+    <div class="card shadow-lg container pt-5 pb-10">
         <div class="titlepage">
-            <h2>Cập Nhật Khu Vực</h2>
+            <h2>Chỉnh sửa loại phòng</h2>
         </div>
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="Id" />
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input class="form-control" asp-for="Name" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Description"></label>
-        <textarea class="form-control" asp-for="Description"></textarea>
-    </div>
-    <div class="form-group">
-        <label asp-for="People"></label>
-        <input type="number" class="form-control" asp-for="People" />
-    </div>
-    <div class="form-group">
-        <label asp-for="ImagePath"></label>
-        <input class="form-control" asp-for="ImagePath" />
-    </div>
-    <button type="submit" class="btn btn-success">Cập Nhật</button>
-    <a href="@Url.Action("Index")" class="btn btn-secondary">Hủy</a>
-</form>
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label for="Name">Tên</label>
+                <input type="text" class="form-control" asp-for="Name" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Description">Mô tả</label>
+                <input type="text" class="form-control" asp-for="Description" required />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="People">Số lượng người</label>
+                <input type="text" class="form-control" asp-for="People" required />
+                <span asp-validation-for="People" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-5">
+                <label for="Image" class="form-label">Ảnh</label>
+                <input type="file" class="form-control" id="Image" name="Image">
+                @if (!string.IsNullOrEmpty(Model.ImagePath))
+                {
+                    <img src="@Url.Content(Model.ImagePath)" alt="Room Image" class="img-thumbnail mt-2" style="max-width: 200px;" />
+                }
+            </div>
+
+            <button type="submit" class="btn btn-primary">Lưu</button>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">Hủy</a>
+        </form>
     </div>
 </div>

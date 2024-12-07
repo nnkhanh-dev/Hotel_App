@@ -24,7 +24,7 @@
   @* ! Full version menu-items *@
   <ul class="menu-inner py-1">
         <li class='menu-item@(currentPage == "/" ? " active" : "")'>
-            <a asp-controller="Dashboards" asp-action="Index" class="menu-link">
+            <a asp-controller="Dashboards" asp-action="index" class="menu-link">
                 <i class="menu-icon tf-icons ri-home-smile-line"></i>
                 <div>Home</div>
             </a>
@@ -33,311 +33,71 @@
     
 
     <!-- Layouts -->
-        <li class='menu-item@(currentPage.StartsWith("/Manage") ? " active open" : "")'>
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons ri-layout-2-line"></i>
-        <div>Trang quản lý</div>
-      </a>
-
-      <ul class="menu-sub">
-
-                <li class='menu-item@(currentPage == "/Manage/Amenity/Index" ? " active" : "")'>
-                    <a asp-controller="Amenity" asp-action="Index" class="menu-link">
-            <div>Quản lý tiện nghi</div>
-          </a>
+        <li class='menu-item@(currentPage == "/" ? " active" : "")'>
+            <a asp-controller="Dashboards" asp-action="Index" class="menu-link">
+                <i class="menu-icon tf-icons ri-article-line"></i>
+                <div>Đơn đặt phòng</div>
+            </a>
         </li>
-                <li class='menu-item@(currentPage == "/Manage/Area/Index" ? " active" : "")'>
-                    <a asp-controller="Area" asp-action="Index" class="menu-link">
-            <div>Quản lý khu vực</div>
-          </a>
+        <li class='menu-item@(currentPage == "/" ? " active" : "")'>
+            <a asp-controller="Dashboards" asp-action="Index" class="menu-link">
+                <i class="menu-icon tf-icons ri-account-circle-line"></i>
+                <div>Quản lý khách hàng</div>
+            </a>
         </li>
-                <li class='menu-item@(currentPage == "/Manage/RoomType/Index" ? " active" : "")'>
-                    <a asp-controller="RoomType" asp-action="Index" class="menu-link">
-            <div>Quản lý loại phòng</div>
-          </a>
+        <li class='menu-item@(currentPage == "/Manage/Amenity/Index" ? " active" : "")'>
+            <a asp-controller="Amenity" asp-action="Index" class="menu-link">
+                <i class="menu-icon tf-icons ri-file-word-2-line"></i>
+                <div>Quản lý tiện nghi</div>
+            </a>
         </li>
-                <li class='menu-item@(currentPage == "/Manage/Room/Index" ? " active" : "")'>
-                    <a asp-controller="Room" asp-action="Index" class="menu-link">
-            <div>Quản lý Phòng</div>
-          </a>
+        <li class='menu-item@(currentPage == "/Manage/Area/Index" ? " active" : "")'>
+            <a asp-controller="Area" asp-action="Index" class="menu-link">
+                <i class="menu-icon tf-icons ri-building-line"></i>
+                <div>Quản lý khu vực</div>
+            </a>
         </li>
-      </ul>
-    </li>
+        <li class='menu-item@(currentPage == "/Manage/RoomType/Index" ? " active" : "")'>
+            <a asp-controller="RoomType" asp-action="Index" class="menu-link">
+                <i class="menu-icon tf-icons ri-government-line"></i>
+                <div>Quản lý loại phòng</div>
+            </a>
+        </li>
+        <li class='menu-item@(currentPage == "/Manage/Room/Index" ? " active" : "")'>
+            <a asp-controller="Room" asp-action="Index" class="menu-link">
+                <i class="menu-icon tf-icons ri-tent-line"></i>
+                <div>Quản lý Phòng</div>
+            </a>
+        </li>
 
     <li class="menu-header mt-7">
-      <span class="menu-header-text">Apps &amp; Pages</span>
+            <span class="menu-header-text">Account &amp; Settings</span>
     </li>
 
     <!-- Pages -->
-        <li class='menu-item@(currentPage.StartsWith("/Pages") ? " active open" : "")'>
+        <li class='menu-item@(currentPage.StartsWith("/") ? " active open" : "")'>
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons ri-layout-left-line"></i>
-        <div>Account Settings</div>
+        <div>Tài khoản</div>
       </a>
       <ul class="menu-sub">
-        <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-          <a asp-controller="Pages" asp-action="AccountSettings" class="menu-link">
-            <div>Account</div>
+                <li class='menu-item@(currentPage == "/Admin/Profile" ? " active" : "")'>
+                    <a href="/Admin/Profile" class="menu-link">
+                        <div>Thông tin</div>
           </a>
         </li>
-        <li class='menu-item@(currentPage == "/Pages/AccountSettingsNotifications" ? " active" : "")'>
-          <a asp-controller="Pages" asp-action="AccountSettingsNotifications" class="menu-link">
-            <div>Notifications</div>
+                <li class='menu-item@(currentPage == "/Admin/Edit" ? " active" : "")'>
+                    <a href="/Admin/Edit" class="menu-link">
+                        <div>Cài đặt</div>
           </a>
         </li>
-        <li class='menu-item@(currentPage == "/Pages/AccountSettingsConnections" ? " active" : "")'>
-          <a asp-controller="Pages" asp-action="AccountSettingsConnections" class="menu-link">
-            <div>Connections</div>
-          </a>
+                <li class='menu-item@(currentPage == "/Dang-Xuat" ? " active" : "")'>
+                    <a href="/dang-xuat" class="menu-link">Đăng xuất</a>
         </li>
       </ul>
     </li>
-        <li class='menu-item@(currentPage.StartsWith("/Pages/Misc") ? " active open" : "")'>
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons ri-shield-keyhole-line"></i>
-        <div>Authentications</div>
-      </a>
-      <ul class="menu-sub">
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-            <div>Login</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-            <div>Register</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Forgot Password</div>
-          </a>
-        </li>
-      </ul>
-    </li>
-    <li class='menu-item@(currentPage.StartsWith("/Pages/Misc") ? " active open" : "")'>
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons ri-box-3-line"></i>
-        <div>Misc</div>
-      </a>
-      <ul class="menu-sub">
-        <li class='menu-item@(currentPage == "/Pages/MiscError" ? " active" : "")'>
-          <a asp-controller="Pages" asp-action="MiscError" class="menu-link" >
-            <div>Error</div>
-          </a>
-        </li>
-        <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-          <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-            <div>Under Maintenance</div>
-          </a>
-        </li>
-      </ul>
-    </li>
-    <!-- Components -->
-    <li class="menu-header mt-7"><span class="menu-header-text">Components</span></li>
-    <!-- Cards -->
-        <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-            <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                <i class="menu-icon tf-icons ri-bank-card-2-line"></i>
-        <div>Cards</div>
-      </a>
-    </li>
-    <!-- User interface -->
-        <li class='menu-item@(currentPage.StartsWith("/Pages/Misc") ? " active open" : "")'>
-      <a href="javascript:void(0)" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons ri-toggle-line"></i>
-        <div>User interface</div>
-      </a>
-      <ul class="menu-sub">
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Accordion</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Alerts</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Badges</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Buttons</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Carousel</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Collapse</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Dropdowns</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Footer</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>List Groups</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Modals</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Navbar</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Offcanvas</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Pagination &amp; Breadcrumbs</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Progress</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Spinners</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Tabs &amp; Pills</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Toasts</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Tooltips &amp; popovers</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Typography</div>
-          </a>
-        </li>
-      </ul>
-    </li>
+        
 
-    <!-- Extended components -->
-        <li class='menu-item@(currentPage.StartsWith("/Pages/Misc") ? " active open" : "")'>
-      <a href="javascript:void(0)" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons ri-box-3-line"></i>
-        <div>Extended UI</div>
-      </a>
-      <ul class="menu-sub">
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Perfect scrollbar</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Text Divider</div>
-          </a>
-        </li>
-      </ul>
-    </li>
-
-    <!-- Icons -->
-        <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-            <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                <i class="menu-icon tf-icons ri-remixicon-line"></i>
-        <div>Icons</div>
-      </a>
-    </li>
-
-    <!-- Forms & Tables -->
-    <li class="menu-header mt-7"><span class="menu-header-text">Forms &amp; Tables</span></li>
-    <!-- Forms -->
-        <li class='menu-item@(currentPage.StartsWith("/Pages/Misc") ? " active open" : "")'>
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons ri-radio-button-line"></i>
-        <div>Form Elements</div>
-      </a>
-      <ul class="menu-sub">
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Basic Inputs</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Input groups</div>
-          </a>
-        </li>
-      </ul>
-    </li>
-        <li class='menu-item@(currentPage.StartsWith("/Pages/Misc") ? " active open" : "")'>
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons ri-box-3-line"></i>
-        <div>Form Layouts</div>
-      </a>
-      <ul class="menu-sub">
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Vertical Form</div>
-          </a>
-        </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                        <div>Horizontal Form</div>
-          </a>
-        </li>
-      </ul>
-    </li>
-    <!-- Form Validation -->
-
-    <!-- Tables -->
-        <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-            <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" >
-                <i class="menu-icon tf-icons ri-table-alt-line"></i>
-        <div>Tables</div>
-      </a>
-    </li>
-    <!-- Data Tables -->
-    <!-- Misc -->
-    <li class="menu-header mt-7"><span class="menu-header-text">Misc</span></li>
-    <li class="menu-item">
-      <a href='@TempData.Peek("support")'  class="menu-link">
-        <i class="menu-icon tf-icons ri-lifebuoy-line"></i>
-        <div>Support</div>
-      </a>
-    </li>
-    <li class="menu-item">
-      <a href='@TempData.Peek("documentation")'  class="menu-link">
-        <i class="menu-icon tf-icons ri-article-line"></i>
-        <div>Documentation</div>
-      </a>
-    </li>
   </ul>
 
 </aside>

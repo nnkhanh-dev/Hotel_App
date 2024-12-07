@@ -113,7 +113,7 @@ namespace HotelApp.Areas.Admin.Controllers
         [HttpPost]
         [Route("RoomType/Edit/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, RoomType roomType)
+        public async Task<IActionResult> Edit(int id, RoomType roomType, IFormFile Image)
         {
             if (id != roomType.Id)
             {
@@ -124,24 +124,64 @@ namespace HotelApp.Areas.Admin.Controllers
             {
                 try
                 {
-                    roomType.ImagePath = '~' + roomType.ImagePath;
+                    if (Image != null && Image.Length > 0)
+                    {
+                        // Handle image upload
+                        var fileExtension = Path.GetExtension(Image.FileName);
+                        var fileName = $"{DateTime.Now.Ticks}{fileExtension}";
+                        var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "upload");
+
+                        if (!Directory.Exists(uploadPath))
+                        {
+                            Directory.CreateDirectory(uploadPath);
+                        }
+
+                        var filePath = Path.Combine(uploadPath, fileName);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await Image.CopyToAsync(stream);
+                        }
+
+                        // Remove old image if exists
+                        if (!string.IsNullOrEmpty(roomType.ImagePath))
+                        {
+                            var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", roomType.ImagePath.TrimStart('~', '/'));
+                            if (System.IO.File.Exists(oldImagePath))
+                            {
+                                System.IO.File.Delete(oldImagePath);
+                            }
+                        }
+
+                        roomType.ImagePath = "~/upload/" + fileName;
+                    }
+
                     _context.Update(roomType);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!_context.RoomTypes.Any(e => e.Id == id))
+                    if (!RoomTypeExists(roomType.Id))
                     {
                         return NotFound();
                     }
-                    throw;
+                    else
+                    {
+                        throw;
+                    }
                 }
 
-                return RedirectToAction(nameof(Index)); // Quay lại danh sách sau khi cập nhật
+                return RedirectToAction(nameof(Index));
             }
 
-            return View(roomType); // Trả lại form nếu model không hợp lệ
+            return View(roomType);
         }
+
+        private bool RoomTypeExists(int id)
+        {
+            return _context.RoomTypes.Any(e => e.Id == id);
+        }
+
         [HttpPost]
         [Route("RoomType/Delete/{id}")]
         [ValidateAntiForgeryToken]
