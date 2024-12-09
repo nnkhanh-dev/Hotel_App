@@ -7,6 +7,7 @@ namespace HotelApp.Models
     {
         [Key]
         public int Id { get; set; }
+        public string Code { get; set; }
         [ForeignKey(nameof(RoomType))]
         public int TypeId { get; set; }
         [ForeignKey(nameof(Area))]

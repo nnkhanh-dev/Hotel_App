@@ -6,6 +6,7 @@ namespace HotelApp.Areas.Admin.ViewModels
     public class RoomCreateVM
     {
         public int TypeId { get; set; }
+        public string Code { get; set; }
         public int AreaId { get; set; }
         public decimal Price { get; set; }
         public decimal Discount { get; set; }

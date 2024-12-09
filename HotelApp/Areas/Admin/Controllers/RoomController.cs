@@ -39,7 +39,8 @@ namespace HotelApp.Areas.Admin.Controllers
                 AreaName = r.Area.Name,
                 Price = r.Price,
                 Discount = r.Discount,
-                Status = r.Status
+                Status = r.Status,
+                Code = r.Code
             })
             .ToListAsync();
             
@@ -74,7 +75,8 @@ public async Task<IActionResult> Create(RoomEditVM viewModel, IFormFileCollectio
         Discount = viewModel.Discount,
         Status = viewModel.Status,
         Amenities = await _context.Amenities.Where(a => viewModel.SelectedAmenities.Contains(a.Id)).ToListAsync(),
-        Images = new List<Image>()
+        Images = new List<Image>(),
+        Code = viewModel.Code
     };
 
     if (newImages?.Count > 0)
@@ -118,6 +120,7 @@ public async Task<IActionResult> Create(RoomEditVM viewModel, IFormFileCollectio
                 Price = room.Price,
                 Discount = room.Discount,
                 Status = room.Status,
+                Code = room.Code,
                 Amenities = room.Amenities.Select(a => a.Name).ToList(),
                 Images = room.Images.ToList()
             };
@@ -148,6 +151,7 @@ public async Task<IActionResult> Create(RoomEditVM viewModel, IFormFileCollectio
                 Price = room.Price,
                 Discount = room.Discount,
                 Status = room.Status,
+                Code = room.Code,
                 RoomTypes = await _context.RoomTypes.Select(rt => new RoomType
                 {
                     Id = rt.Id,
@@ -184,6 +188,7 @@ public async Task<IActionResult> Create(RoomEditVM viewModel, IFormFileCollectio
             room.Price = viewModel.Price;
             room.Discount = viewModel.Discount;
             room.Status = viewModel.Status;
+            room.Code = viewModel.Code;
 
             // Cập nhật tiện ích
             room.Amenities.Clear();

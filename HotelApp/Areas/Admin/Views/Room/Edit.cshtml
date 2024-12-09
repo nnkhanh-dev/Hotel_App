@@ -10,6 +10,10 @@
     <form id="editRoomForm" asp-action="Edit" asp-controller="Room" method="post" enctype="multipart/form-data">
         <input type="hidden" id="RoomId" name="Id" value="@Model.Id" />
 
+                <div class="form-group">
+                    <label for="Code">Tên phòng</label>
+                    <input type="text" id="Code" name="Code" class="form-control" value="@Model.Code" />
+                </div>
         <!-- Loại phòng -->
         <div class="form-group">
             <label for="TypeId">Loại Phòng</label>

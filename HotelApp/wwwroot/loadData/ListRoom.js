@@ -11,6 +11,9 @@
                 render: (data, type, row, meta) => meta.row + 1, // meta.row bắt đầu từ 0
             },
             {
+                data: 'code'
+            },
+            {
                 data: 'roomTypeName'
             },
             {
@@ -40,12 +43,13 @@
         ],
         columnDefs: [
             { width: "5%", targets: 0 },
-            { width: "15%", targets: 1 },
-            { width: "10%" , targets: 2 },
-            { width: "15%", targets: 3 },
-            { width: "10%", targets: 4 },
-            { width: "15%", targets: 5 },
-            { width: "20%", targets: 6 }
+            { width: "10%", targets: 1 },
+            { width: "15%", targets: 2 },
+            { width: "10%" , targets: 3 },
+            { width: "15%", targets: 4 },
+            { width: "5%", targets: 5 },
+            { width: "10%", targets: 6 },
+            { width: "20%", targets: 7 }
         ]
     });
 });
