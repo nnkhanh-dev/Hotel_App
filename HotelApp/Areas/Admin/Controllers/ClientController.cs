@@ -38,25 +38,31 @@ namespace HotelApp.Areas.Admin.Controllers
         [Route("Client/Create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(RegisterVM model)
+        public async Task<IActionResult> Create(RegisterVM model, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
-                AppUser user = new AppUser();
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
-                user.FullName = model.FirstName.Trim() + ' ' + model.LastName;
-                user.UserName = model.Email.Trim();
-                user.Email = model.Email.Trim();
-                user.PhoneNumber = model.PhoneNumber.Trim();
-                user.NormalizedEmail = model.Email.Trim().ToUpperInvariant();
-                user.Password = model.Password.Trim();
-                user.AvatarUrl = "~/upload/15122003basicavatar.png";
+                AppUser user = new AppUser
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    FullName = model.FirstName.Trim() + ' ' + model.LastName,
+                    UserName = model.Email.Trim(),
+                    Email = model.Email.Trim(),
+                    PhoneNumber = model.PhoneNumber.Trim(),
+                    NormalizedEmail = model.Email.Trim().ToUpperInvariant(),
+                    Password = model.Password.Trim(),
+                    AvatarUrl = "~/upload/15122003basicavatar.png"
+                };
                 var result = await _userManager.CreateAsync(user, model.Password!);
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, "Client");
-                    return RedirectToAction(nameof(Index));
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    return RedirectToAction("Index");
                 }
 
                 foreach (var error in result.Errors)
@@ -67,6 +73,16 @@ namespace HotelApp.Areas.Admin.Controllers
 
             return View(model);
         }
+
+
+        [Route("Client/Select")]
+        [HttpGet]
+        public async Task<IActionResult> SelectClient()
+        {
+            var clients = await _userManager.GetUsersInRoleAsync("Client");
+            return View(clients.ToList());
+        }
+
 
 
 

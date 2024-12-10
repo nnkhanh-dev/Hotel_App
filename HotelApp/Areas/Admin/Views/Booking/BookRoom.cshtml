@@ -1,0 +1,64 @@
+﻿@model BookingVM
+
+<div class="container">
+    <div class="row mt-4 align-items-center">
+        <div class="col-auto">
+            <label for="CheckIn" class="form-label">Chọn ngày nhận phòng:</label>
+            <input type="date" id="CheckIn" class="form-control" required />
+        </div>
+        <div class="col-auto">
+            <label for="CheckOut" class="form-label">Chọn ngày trả phòng:</label>
+            <input type="date" id="CheckOut" class="form-control" required />
+        </div>
+    </div>
+
+    <div class="row g-3 align-items-center">
+        <div class="col-md-4">
+            <label for="roomType" class="form-label">Chọn phòng:</label>
+            <select id="roomType" class="form-select">
+                <!-- Các option phòng sẽ được điền bằng AJAX -->
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="area" class="form-label">Chọn khu vực:</label>
+            <select id="area" class="form-select">
+                <!-- Các option khu vực sẽ được điền bằng AJAX -->
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="price" class="form-label">Giá:</label>
+            <select id="price" class="form-select">
+                <option value="0">Mặc định</option>
+                <option value="1">Thấp đến cao</option>
+                <option value="2">Cao đến thấp</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div id="listAmenities" class="col-12">
+            <!-- Các checkbox tiện nghi sẽ được điền bằng AJAX -->
+        </div>
+    </div>
+    <input type="hidden" id="userId" value="@Model.UserId" />
+    <button class="btn btn-outline-danger" id="filterBtn">Tìm phòng ngay</button>
+</div>
+
+<div class="container mt-5">
+    <div class="row" id="room-container">
+        <!-- AJAX sẽ render dữ liệu tại đây -->
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade mt-xxl-5 pt-xxl-5" id="roomDetailModal" tabindex="-1" aria-labelledby="roomDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content" style="margin: 100px 0">
+            <div class="modal-header">
+                <h2 class="modal-title" id="roomDetailModalLabel">Chi tiết phòng</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="roomDetailModalBody">
+                <!-- Nội dung chi tiết phòng sẽ được tải ở đây -->
+            </div>
+        </div>
+    </div>
+</div>

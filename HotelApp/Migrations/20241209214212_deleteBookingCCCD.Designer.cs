@@ -4,6 +4,7 @@ using HotelApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241209214212_deleteBookingCCCD")]
+    partial class deleteBookingCCCD
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,7 +240,7 @@ namespace HotelApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("BookingId")
+                    b.Property<int?>("BookingId")
                         .HasColumnType("int");
 
                     b.Property<string>("FrontImg")
@@ -445,13 +448,13 @@ namespace HotelApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "feba5148-fdc7-4a2c-8874-1504b5c52c55",
+                            Id = "0e216cb7-c500-4c05-9f3c-19d2b36f0c56",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "9eeb3b1c-d25c-4438-8c4c-1e52e63d8062",
+                            Id = "39d51654-517e-484d-8732-b3a2f95c38eb",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });
@@ -605,13 +608,9 @@ namespace HotelApp.Migrations
 
             modelBuilder.Entity("HotelApp.Models.CCCD", b =>
                 {
-                    b.HasOne("HotelApp.Models.Booking", "Booking")
+                    b.HasOne("HotelApp.Models.Booking", null)
                         .WithMany("CCCDs")
-                        .HasForeignKey("BookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Booking");
+                        .HasForeignKey("BookingId");
                 });
 
             modelBuilder.Entity("HotelApp.Models.Image", b =>

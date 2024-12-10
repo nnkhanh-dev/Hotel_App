@@ -33,13 +33,13 @@
     
 
     <!-- Layouts -->
-        <li class='menu-item@(currentPage == "/" ? " active" : "")'>
-            <a asp-controller="Dashboards" asp-action="Index" class="menu-link">
+        <li class='menu-item@(currentPage == "/Booking/Index" ? " active" : "")'>
+            <a asp-controller="Booking" asp-action="Index" class="menu-link">
                 <i class="menu-icon tf-icons ri-article-line"></i>
                 <div>Đơn đặt phòng</div>
             </a>
         </li>
-        <li class='menu-item@(currentPage == "//Manage/Client/Index" ? " active" : "")'>
+        <li class='menu-item@(currentPage == "/Manage/Client/Index" ? " active" : "")'>
             <a asp-controller="Client" asp-action="Index" class="menu-link">
                 <i class="menu-icon tf-icons ri-account-circle-line"></i>
                 <div>Quản lý khách hàng</div>

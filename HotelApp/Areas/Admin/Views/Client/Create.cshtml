@@ -6,6 +6,7 @@
             <h2>Thêm khách hàng</h2>
         </div>
         <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="returnUrl" value="@Context.Request.Query["returnUrl"]" />
             <div class="form-group">
                 <label for="FirstName">Họ</label>
                 <input asp-for="FirstName" type="text" class="form-control" required />

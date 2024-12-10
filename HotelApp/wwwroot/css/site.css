@@ -29,3 +29,12 @@ body {
 .form-group{
     margin: 10px 0;
 }
+
+.total-amount {
+    font-size: 2.5rem;
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
+    font-family: 'Roboto', sans-serif;
+    color: #dc3545;
+}
