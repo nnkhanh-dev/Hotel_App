@@ -129,6 +129,9 @@ function deleteImage(imageId) {
                 } else {
                     toastr.error("Xóa ảnh thất bại");
                 }
+            },
+            error: function (xhr, status, error) {
+                toastr.error("Lỗi kết nối: " + error);
             }
         });
     }
