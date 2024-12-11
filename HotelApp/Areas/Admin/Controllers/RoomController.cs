@@ -83,13 +83,13 @@ public async Task<IActionResult> Create(RoomEditVM viewModel, IFormFileCollectio
     {
         foreach (var file in newImages)
         {
-            var filePath = Path.Combine("wwwroot/images", file.FileName);
+            var filePath = Path.Combine("wwwroot/upload", file.FileName);
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
             }
 
-            room.Images.Add(new Image { Path = "/images/" + file.FileName, Caption = file.FileName });
+            room.Images.Add(new Image { Path = "/upload/" + file.FileName, Caption = file.FileName });
         }
     }
 
@@ -200,13 +200,13 @@ public async Task<IActionResult> Create(RoomEditVM viewModel, IFormFileCollectio
             {
                 foreach (var file in newImages)
                 {
-                    var filePath = Path.Combine("wwwroot/images", file.FileName);
+                    var filePath = Path.Combine("wwwroot/upload", file.FileName);
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await file.CopyToAsync(stream);
                     }
 
-                    room.Images.Add(new Image { Path = "/images/" + file.FileName, Caption = file.FileName });
+                    room.Images.Add(new Image { Path = "/upload/" + file.FileName, Caption = file.FileName });
                 }
             }
             ViewData["Statuses"] = GetStatuses();

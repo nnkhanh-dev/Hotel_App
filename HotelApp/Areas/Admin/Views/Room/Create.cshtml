@@ -66,8 +66,8 @@
                     @foreach (var amenity in Model.Amenities)
                     {
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" name="SelectedAmenities" value="@amenity.Id" @(Model.SelectedAmenities.Contains(amenity.Id) ? "checked" : "") />
-                            <label class="form-check-label">@amenity.Name</label>
+                            <input class="form-check-input" id="@amenity.Id" type="checkbox" name="SelectedAmenities" value="@amenity.Id" @(Model.SelectedAmenities.Contains(amenity.Id) ? "checked" : "") />
+                            <label class="form-check-label" for="@amenity.Id">@amenity.Name</label>
                         </div>
                     }
                 </div>

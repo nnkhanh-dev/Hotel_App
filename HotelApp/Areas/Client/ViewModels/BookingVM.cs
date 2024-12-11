@@ -30,6 +30,6 @@ namespace HotelApp.Areas.Client.ViewModels
         public string? UserEmail { get; set; } 
         public string? UserPhoneNumber { get; set; }
 
-        public List<CCCD> CCCD { get; set; }
+        public List<CCCD>? CCCD { get; set; }
     }
 }

@@ -8,7 +8,7 @@
         @foreach (var imageUrl in Model.ImageUrls)
         {
             <div class="item">
-                <img src="@imageUrl" alt="Room Image" class="d-block w-100 img-fluid">
+                <img src="@imageUrl" alt="Room Image" class="d-block w-100 img-fluid" style="height: 300px;object-fit:fill;">
             </div>
         }
     </div>
@@ -30,7 +30,7 @@
     <ul>
         @foreach (var amenity in Model.AmenityNames)
         {
-            <li class="btn btn-sm btn-primary">@amenity</li>
+            <li class="btn btn-sm btn-primary mt-1">@amenity</li>
         }
     </ul>
     <button id="bookingBtn" data-roomid ="@Model.Id" class="btn w-100  my-3" style="background-color: black; color: white;">Đặt ngay</button>
