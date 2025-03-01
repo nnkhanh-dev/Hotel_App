@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using HotelApp.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 
 namespace HotelApp.Controllers
 {
@@ -97,6 +98,12 @@ namespace HotelApp.Controllers
 
         [Route("/KhuVuc")]
         public IActionResult KhuVuc()
+        {
+            var areas = _context.Areas.ToList();
+            return Json(new { Data = areas });
+        }
+        [Route("/TrangThai")]
+        public IActionResult TrangThai()
         {
             var areas = _context.Areas.ToList();
             return Json(new { Data = areas });
@@ -225,7 +232,16 @@ namespace HotelApp.Controllers
                     return RedirectToAction("Login", "Account");
                 }
             }
-            return RedirectToAction("Login", "Account");
+            else
+            {
+                HttpContext.Session.SetString("BookingInfo", JsonConvert.SerializeObject(new
+                {
+                    Id = id,
+                    CheckIn = checkin.ToString("yyyy-MM-dd"),
+                    CheckOut = checkout.ToString("yyyy-MM-dd")
+                }));
+                return RedirectToAction("Login", "Account");
+            }
         }
 
 

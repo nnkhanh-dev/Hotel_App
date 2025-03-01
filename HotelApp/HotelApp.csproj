@@ -23,7 +23,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\" />
+    <Content Update="wwwroot\loadData\ListRoom.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\cccd\" />
   </ItemGroup>
 
 </Project>

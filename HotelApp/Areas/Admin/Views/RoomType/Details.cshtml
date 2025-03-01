@@ -1,0 +1,32 @@
+﻿@model HotelApp.Models.RoomType
+
+<div class="layout-demo-wrapper">
+    <div class="card shadow-lg container p-5">
+        <div class="titlepage">
+            <h2>Chi Tiết Khu Vực</h2>
+        </div>
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Tên</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Mô Tả</th>
+        <td>@Model.Description</td>
+    </tr>
+    <tr>
+        <th>Số Người</th>
+        <td>@Model.People</td>
+    </tr>
+    <tr>
+        <th>Hình Ảnh</th>
+        <td><img src="@Model.ImagePath" alt="Image" style="max-width:200px;"></td>
+    </tr>
+</table>
+<a href="@Url.Action("Index")" class="btn btn-primary">Quay lại</a>
+    </div>
+</div>

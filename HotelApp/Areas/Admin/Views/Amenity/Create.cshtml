@@ -1,0 +1,24 @@
+﻿@model HotelApp.Areas.Admin.ViewModels.AmenityVM
+
+<div class="layout-demo-wrapper">
+    <div class="card shadow-lg container p-5">
+        <div class="titlepage">
+            <h2>Thêm tiện nghi</h2>
+        </div>
+
+        <form asp-action="Create" method="post">
+            <div class="form-group">
+                <label for="Name">Tên tiện nghi</label>
+                <input type="text" class="form-control" id="Name" name="Name" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label for="Description">Mô tả</label>
+                <input type="text" class="form-control" id="Description" name="Description" required />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Lưu</button>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">Hủy</a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+﻿@model HotelApp.Areas.Client.ViewModels.BookingVM
+
+<div class="container mt-5">
+    <div class="card border-0 shadow-lg">
+        <div class="card-body">
+
+            <!-- Top Section: Booking Date -->
+            <div class="d-flex justify-content-between mb-4">
+                <span class="text-muted small">Ngày đặt phòng: @Model.CreateAt.ToString("dd/MM/yyyy HH:mm")</span>
+                <span class="text-muted small">Mã đặt phòng: @Model.Id</span>
+            </div>
+
+            <!-- Main Section: Booking Details -->
+            <form>
+
+                <!-- Booking Information (User Details) -->
+                <fieldset class="border p-3 mb-4">
+                    <legend class="w-auto text-primary">Thông tin người dùng</legend>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="UserId" class="form-label">User ID</label>
+                            <input asp-for="UserId" class="form-control" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="UserFullName" class="form-label">Họ và tên</label>
+                            <input asp-for="UserFullName" class="form-control" readonly />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="UserEmail" class="form-label">Email</label>
+                            <input asp-for="UserEmail" class="form-control" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="UserPhoneNumber" class="form-label">Số điện thoại</label>
+                            <input asp-for="UserPhoneNumber" class="form-control" readonly />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Room Information -->
+                <fieldset class="border p-3 mb-4">
+                    <legend class="w-auto text-primary">Thông tin phòng</legend>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="RoomCode" class="form-label">Mã phòng</label>
+                            <input asp-for="RoomCode" class="form-control" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="TypeName" class="form-label">Loại phòng</label>
+                            <input asp-for="TypeName" class="form-control" readonly />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="AreaName" class="form-label">Khu vực</label>
+                            <input asp-for="AreaName" class="form-control" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Price" class="form-label">Giá phòng</label>
+                            <input class="form-control" value="@Model.Price.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))" readonly />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Payment and Check-in Information -->
+                <fieldset class="border p-3 mb-4">
+                    <legend class="w-auto text-primary">Thông tin đặt phòng</legend>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="CheckIn" class="form-label">Ngày nhận phòng</label>
+                            <input class="form-control" value="@Model.CheckIn.ToString("dd/MM/yyyy")" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="CheckOut" class="form-label">Ngày trả phòng</label>
+                            <input class="form-control" value="@Model.CheckOut.ToString("dd/MM/yyyy")" readonly />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="PayType" class="form-label">Hình thức thanh toán</label>
+                            <input type="text" class="form-control" value="@(Model.PayType == 0 ? "Thanh toán khi nhận phòng" : "Thanh toán VnPay")" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Status" class="form-label">Trạng thái</label>
+                            <input type="text" class="form-control" value="@(Model.Status == 0 ? "Chờ nhận" : Model.Status == 1 ? "Đang sử dụng" : Model.Status == 2 ? "Chờ thanh toán" : "Hoàn thành")" readonly />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Total Amount -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="Total" class="form-label">Tổng tiền</label>
+                        <input class="total-amount" value="@Model.Total.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))" readonly />
+                    </div>
+                </div>
+
+                <!-- CCCD Images -->
+                <fieldset class="border p-3 mb-4">
+                    <legend class="w-auto text-primary">Ảnh CCCD</legend>
+                    <div id="carouselExampleIndicators" class="owl-carousel owl-theme mb-4">
+                        @foreach (var cccd in Model.CCCD)
+                        {
+                            <div class="item text-center">
+                                <img src="@Url.Content(cccd.FrontImg)" class="img-fluid" alt="Front Image" style="object-fit: fill; height:150px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+                                <img src="@Url.Content(cccd.BackImg)" class="img-fluid mt-2" alt="Back Image" style="object-fit: fill; height:150px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+                            </div>
+                        }
+                    </div>
+                </fieldset>
+
+                <!-- Back Button -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="@Url.Action("Index")" class="btn btn-outline-danger px-4">Quay lại</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

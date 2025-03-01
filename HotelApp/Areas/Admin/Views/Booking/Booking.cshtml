@@ -1,0 +1,39 @@
+﻿@model HotelApp.Areas.Client.ViewModels.BookingVM
+@{
+    ViewData["Title"] = "Đặt phòng";
+}
+
+<div class="container-fluid d-flex justify-content-center align-items-center vh-100" style="background-image: url('/images/banner1.jpg'); background-size: cover;">
+    <div class="card shadow-sm p-4" style="max-width: 600px; width: 100%;">
+        <h2 class="text-center mb-4">THÔNG TIN ĐẶT PHÒNG</h2>
+
+        <!-- Form đặt phòng -->
+        <form asp-controller="Admin" asp-action="Booking" method="post">
+            <!-- Trường ẩn để lưu thông tin phòng và người dùng -->
+            <input asp-for="RoomId" class="form-control" type="hidden" />
+            <input asp-for="UserId" class="form-control" type="hidden" />
+            <input asp-for="CheckIn" type="hidden" class="form-control" />
+            <input asp-for="CheckOut" type="hidden" class="form-control" />
+            <input asp-for="Price" class="form-control" type="hidden" />
+            <input asp-for="Total" class="form-control" type="hidden" />
+            <input asp-for="CreateAt" class="form-control" type="hidden" />
+            <input asp-for="Description" class="form-control" type="hidden" />
+
+            <!-- Hiển thị thông tin người dùng -->
+            <p><strong>User ID:</strong> @Model.UserId</p>
+            <p><strong>Họ và tên:</strong> @Model.UserFullName</p>
+
+            <!-- Hiển thị thông tin phòng -->
+            <h3>@Model.TypeName - @Model.AreaName</h3>
+            <p><strong>Ngày nhận phòng:</strong> @Model.CheckIn.ToString("dd/MM/yyyy")</p>
+            <p><strong>Ngày trả phòng:</strong> @Model.CheckOut.ToString("dd/MM/yyyy")</p>
+            <p><strong>Giá:</strong> @Model.Price.ToString("N0") VND</p>
+            <p><strong>Giảm giá phòng:</strong> @(Model.DiscountRoom?.ToString("N2") ?? "0.00") %</p>
+            <p><strong>Tổng tiền:</strong> @Model.Total.ToString("N0") VND</p>
+
+
+            <!-- Nút đặt phòng -->
+            <button type="submit" class="btn w-100 mt-4" style="background-color: black; color: white">Đặt phòng</button>
+        </form>
+    </div>
+</div>

@@ -37,21 +37,6 @@ namespace HotelApp.Migrations
                     b.ToTable("AmenityRoom");
                 });
 
-            modelBuilder.Entity("BookingCCCD", b =>
-                {
-                    b.Property<int>("BookingsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CCCDsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BookingsId", "CCCDsId");
-
-                    b.HasIndex("CCCDsId");
-
-                    b.ToTable("BookingCCCD");
-                });
-
             modelBuilder.Entity("HotelApp.Models.Amenity", b =>
                 {
                     b.Property<int>("Id")
@@ -103,7 +88,6 @@ namespace HotelApp.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -119,7 +103,6 @@ namespace HotelApp.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -254,11 +237,16 @@ namespace HotelApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FrontImg")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookingId");
 
                     b.ToTable("CCCDs");
                 });
@@ -332,6 +320,10 @@ namespace HotelApp.Migrations
 
                     b.Property<int>("AreaId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Discount")
                         .HasColumnType("decimal(18,2)");
@@ -453,13 +445,13 @@ namespace HotelApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cafe9e3b-0416-4aff-82ff-6c4f2eff612c",
+                            Id = "feba5148-fdc7-4a2c-8874-1504b5c52c55",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "aaff6d55-adb3-416d-a5c3-270827f27b09",
+                            Id = "9eeb3b1c-d25c-4438-8c4c-1e52e63d8062",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });
@@ -586,21 +578,6 @@ namespace HotelApp.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BookingCCCD", b =>
-                {
-                    b.HasOne("HotelApp.Models.Booking", null)
-                        .WithMany()
-                        .HasForeignKey("BookingsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HotelApp.Models.CCCD", null)
-                        .WithMany()
-                        .HasForeignKey("CCCDsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HotelApp.Models.Booking", b =>
                 {
                     b.HasOne("HotelApp.Models.Room", "Room")
@@ -624,6 +601,17 @@ namespace HotelApp.Migrations
                     b.Navigation("User");
 
                     b.Navigation("Voucher");
+                });
+
+            modelBuilder.Entity("HotelApp.Models.CCCD", b =>
+                {
+                    b.HasOne("HotelApp.Models.Booking", "Booking")
+                        .WithMany("CCCDs")
+                        .HasForeignKey("BookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Booking");
                 });
 
             modelBuilder.Entity("HotelApp.Models.Image", b =>
@@ -705,6 +693,11 @@ namespace HotelApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HotelApp.Models.Booking", b =>
+                {
+                    b.Navigation("CCCDs");
                 });
 
             modelBuilder.Entity("HotelApp.Models.Room", b =>

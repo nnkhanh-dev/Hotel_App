@@ -1,0 +1,104 @@
+﻿@{
+  TempData.Keep();
+  string? currentPage = ViewContext.HttpContext.Request.Path;
+}
+
+<!-- Menu -->
+@* ! Do this simple *@
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+
+  @* ! Hide app brand if navbar-full *@
+  <div class='app-brand demo @((@ViewData["navbarFull"] != null && Convert.ToBoolean(@ViewData["navbarFull"])) ? "d-xl-none" : "")'>
+    <a asp-controller="Dashboards" asp-action="Index" class="app-brand-link">
+      <span class="app-brand-logo demo me-1">  @await Html.PartialAsync("../_Partials/_Macros")</span>
+      <span class="app-brand-text demo menu-text fw-semibold ms-2">@TempData.Peek("appName")</span>
+    </a>
+
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="menu-toggle-icon d-xl-block align-middle"></i>
+    </a>
+  </div>
+
+  <div class="menu-inner-shadow"></div>
+
+  @* ! Full version menu-items *@
+  <ul class="menu-inner py-1">
+        <li class='menu-item@(currentPage == "/" ? " active" : "")'>
+            <a asp-controller="Dashboards" asp-action="index" class="menu-link">
+                <i class="menu-icon tf-icons ri-home-smile-line"></i>
+                <div>Home</div>
+            </a>
+        </li>
+    <!-- Dashboards -->
+    
+
+    <!-- Layouts -->
+        <li class='menu-item@(currentPage == "/Booking/Index" ? " active" : "")'>
+            <a asp-controller="Booking" asp-action="Index" class="menu-link">
+                <i class="menu-icon tf-icons ri-article-line"></i>
+                <div>Quản lý đơn đặt phòng</div>
+            </a>
+        </li>
+        <li class='menu-item@(currentPage == "/Manage/Client/Index" ? " active" : "")'>
+            <a asp-controller="Client" asp-action="Index" class="menu-link">
+                <i class="menu-icon tf-icons ri-account-circle-line"></i>
+                <div>Quản lý khách hàng</div>
+            </a>
+        </li>
+        <li class='menu-item@(currentPage == "/Manage/Amenity/Index" ? " active" : "")'>
+            <a asp-controller="Amenity" asp-action="Index" class="menu-link">
+                <i class="menu-icon tf-icons ri-file-word-2-line"></i>
+                <div>Quản lý tiện nghi</div>
+            </a>
+        </li>
+        <li class='menu-item@(currentPage == "/Manage/Area/Index" ? " active" : "")'>
+            <a asp-controller="Area" asp-action="Index" class="menu-link">
+                <i class="menu-icon tf-icons ri-building-line"></i>
+                <div>Quản lý khu vực</div>
+            </a>
+        </li>
+        <li class='menu-item@(currentPage == "/Manage/RoomType/Index" ? " active" : "")'>
+            <a asp-controller="RoomType" asp-action="Index" class="menu-link">
+                <i class="menu-icon tf-icons ri-government-line"></i>
+                <div>Quản lý loại phòng</div>
+            </a>
+        </li>
+        <li class='menu-item@(currentPage == "/Manage/Room/Index" ? " active" : "")'>
+            <a asp-controller="Room" asp-action="Index" class="menu-link">
+                <i class="menu-icon tf-icons ri-tent-line"></i>
+                <div>Quản lý Phòng</div>
+            </a>
+        </li>
+
+    <li class="menu-header mt-7">
+            <span class="menu-header-text">Account &amp; Settings</span>
+    </li>
+
+    <!-- Pages -->
+        <li class='menu-item@(currentPage.StartsWith("/") ? " active open" : "")'>
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons ri-layout-left-line"></i>
+        <div>Tài khoản</div>
+      </a>
+      <ul class="menu-sub">
+                <li class='menu-item@(currentPage == "/Admin/Profile" ? " active" : "")'>
+                    <a href="/Admin/Profile" class="menu-link">
+                        <div>Thông tin</div>
+          </a>
+        </li>
+                <li class='menu-item@(currentPage == "/Admin/Edit" ? " active" : "")'>
+                    <a href="/Admin/Edit" class="menu-link">
+                        <div>Cài đặt</div>
+          </a>
+        </li>
+                <li class='menu-item@(currentPage == "/Dang-Xuat" ? " active" : "")'>
+                    <a href="/dang-xuat" class="menu-link">Đăng xuất</a>
+        </li>
+      </ul>
+    </li>
+        
+
+  </ul>
+
+</aside>
+<!-- / Menu -->

@@ -76,7 +76,7 @@
 
         data.forEach(room => {
             const firstImageUrl = room.imageUrls.length > 0 ? room.imageUrls[0].replace('~', '') : 'placeholder.jpg';
-            const amenitiesHtml = room.amenityNames.map(amenity => `<span class="badge bg-primary me-1">${amenity}</span>`).join('');
+            const amenitiesHtml = room.amenityNames.map(amenity => `<span class="badge bg-primary me-1 mt-1">${amenity}</span>`).join('');
 
             const roomHtml = `
             <div class="col-md-6 mb-4">
@@ -89,7 +89,8 @@
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <h3 class="card-title">${room.typeName} - ${room.areaName}</h3>
                                 <p class="card-text">
-                                    <strong>Giá:</strong> ${room.price.toLocaleString()} VND<br>
+                                    <strong>Giá:</strong> ${room.price.toLocaleString()} VND
+                                    <br>
                                     <strong>Tiện nghi:</strong> ${amenitiesHtml}
                                 </p>
                                 <a onClick="Detail('/RoomDetail/${room.id}')" class="btn btn-outline-secondary btn-sm align-self-start mt-3">Xem chi tiết</a>
@@ -133,7 +134,6 @@ function Detail(url) {
                 }
             });
             $('#roomDetailModal').modal('show');
-          
             $('#bookingBtn').click(function () {
                 const checkIn = $('#CheckIn').val();
                 const checkOut = $('#CheckOut').val();
@@ -145,7 +145,6 @@ function Detail(url) {
                     window.location.href = `Booking/${roomId}/${checkIn}/${checkOut}`;
                 }
             });
-
         },
         error: function (xhr, status, error) {
             // Hiển thị lỗi chi tiết

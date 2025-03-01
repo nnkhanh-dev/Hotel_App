@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, initial-scale=1, maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewData["Title"] - HotelManage</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <link rel="stylesheet" href="~/css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+
+
+
+    <link rel="stylesheet" href="~/css/slider.css">
+    <link rel="icon" href="~/images/fevicon.png" type="image/gif" />
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo section -->
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 logo_section d-flex justify-content-center align-items-center">
+                        <h1 class="m-0 p-0" style="font-size:36px; white-space: nowrap;">
+                            <span style="color:red;">Quản </span>lý
+                        </h1>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 d-flex justify-content-between">
+                        <nav class="navigation navbar navbar-expand-md navbar-dark">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarsExample04">
+                                <!-- Sử dụng flexbox cho navbar-collapse -->
+                                <ul class="navbar-nav pl-0">
+                                    <!-- Các thẻ <li> nằm sát lề trái -->
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="@Url.Action("Index", "Home")">Trang chủ</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Index", "Area")">QL khu vực</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Index", "RoomType")">QL loại phòng</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Index", "Room")">QL phòng</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Index", "Amenity")">QL Tiện nghi</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Index", "Image")">QL ảnh</a>
+                                    </li>
+                                </ul>
+                                <div class="d-flex align-items-center">
+                                    <li class="nav-item dropdown">
+                                        <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Quản lý
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu">
+                                            <li><a class="dropdown-item" href="/Admin/Profile">Quản lý tài khoản</a></li>
+                                            <li><a class="dropdown-item" href="/Admin/Edit">Quản lý đơn đặt phòng</a></li>
+                                            <li><a class="dropdown-item" href="/dang-xuat">Đăng xuất</a></li>
+                                        </ul>
+                                    </li>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    @RenderBody()
+
+    <footer>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class=" col-md-4">
+                        <h3>Contact US</h3>
+                        <ul class="conta">
+                            <li><i class="fa fa-map-marker" aria-hidden="true"></i> Address</li>
+                            <li><i class="fa fa-mobile" aria-hidden="true"></i> +01 1234569540</li>
+                            <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> demo@gmail.com</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Menu Link</h3>
+                        <ul class="link_menu">
+                            <li class="active"><a href="#">Trang chủ</a></li>
+                            <li><a href="about.html"> about</a></li>
+                            <li><a href="room.html">Our Room</a></li>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>News letter</h3>
+                        <form class="bottom_form">
+                            <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
+                            <button class="sub_btn">subscribe</button>
+                        </form>
+                        <ul class="social_icon">
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/js/custom.js"></script>
+    <script src="~/loadData/ListArea.js"></script>
+    <script src="~/loadData/ListAmenity.js"></script>
+    <script src="~/loadData/ListRoom.js"></script>
+    <script src="~/loadData/ListRoomType.js"></script>
+    <script src="~/loaddata/loadroomtypes.js"></script>
+    <script src="~/loaddata/LoadAreas.js"></script>
+    <script src="~/loaddata/loadvouchers.js"></script>
+
+
+    <!-- Thông báo -->
+    <script>
+        $(document).ready(function () {
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>toastr.success("@TempData["SuccessMessage"]");</text>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <text>toastr.error("@TempData["ErrorMessage"]");</text>
+        }
+                });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

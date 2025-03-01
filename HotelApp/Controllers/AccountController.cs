@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using HotelApp.Areas.Client;
+using Newtonsoft.Json;
 
 namespace HotelApp.Controllers
 {
@@ -17,18 +18,34 @@ namespace HotelApp.Controllers
 
         public async Task<IActionResult> Login()
         {
+
             if (User.Identity.IsAuthenticated)
             {
                 var user = await userManager.GetUserAsync(User);
                 var roles = await userManager.GetRolesAsync(user);
                 if (roles.Contains("Admin"))
                 {
-                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    return RedirectToAction("Index", "Dashboards", new { area = "Admin" });
                 }
                 else
                 {
                     if (roles.Contains("Client"))
                     {
+                        var bookingInfoJson = HttpContext.Session.GetString("BookingInfo");
+                        if (!string.IsNullOrEmpty(bookingInfoJson))
+                        {
+                            // Deserialize thông tin từ Session
+                            var bookingInfo = JsonConvert.DeserializeObject<dynamic>(bookingInfoJson);
+                            int id = bookingInfo.Id;
+                            string checkIn = bookingInfo.CheckIn;
+                            string checkOut = bookingInfo.CheckOut;
+
+                            // Xóa Session sau khi xử lý
+                            HttpContext.Session.Remove("BookingInfo");
+
+                            // Chuyển hướng đến trang Booking
+                            return Redirect($"/Client/Booking/{id}/{checkIn}/{checkOut}");
+                        }
                         return RedirectToAction("Index", "Home", new { area = "Client" });
                     }
                     else
@@ -58,12 +75,27 @@ namespace HotelApp.Controllers
                         var roles = await userManager.GetRolesAsync(user);
                         if (roles.Contains("Admin"))
                         {
-                            return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                            return RedirectToAction("Index", "Dashboards", new { area = "Admin" });
                         }
                         else
                         {
                             if (roles.Contains("Client"))
                             {
+                                var bookingInfoJson = HttpContext.Session.GetString("BookingInfo");
+                                if (!string.IsNullOrEmpty(bookingInfoJson))
+                                {
+                                    // Deserialize thông tin từ Session
+                                    var bookingInfo = JsonConvert.DeserializeObject<dynamic>(bookingInfoJson);
+                                    int id = bookingInfo.Id;
+                                    string checkIn = bookingInfo.CheckIn;
+                                    string checkOut = bookingInfo.CheckOut;
+
+                                    // Xóa Session sau khi xử lý
+                                    HttpContext.Session.Remove("BookingInfo");
+
+                                    // Chuyển hướng đến trang Booking
+                                    return Redirect($"/Client/Booking/{id}/{checkIn}/{checkOut}");
+                                }
                                 return RedirectToAction("Index", "Home", new { area = "Client" });
                             }
                             else
@@ -121,6 +153,21 @@ namespace HotelApp.Controllers
                         return View(model); // Nếu lỗi, hiển thị lại form đăng ký
                     }
                     await signInManager.SignInAsync(user, false);
+                    var bookingInfoJson = HttpContext.Session.GetString("BookingInfo");
+                    if (!string.IsNullOrEmpty(bookingInfoJson))
+                    {
+                        // Deserialize thông tin từ Session
+                        var bookingInfo = JsonConvert.DeserializeObject<dynamic>(bookingInfoJson);
+                        int id = bookingInfo.Id;
+                        string checkIn = bookingInfo.CheckIn;
+                        string checkOut = bookingInfo.CheckOut;
+
+                        // Xóa Session sau khi xử lý
+                        HttpContext.Session.Remove("BookingInfo");
+
+                        // Chuyển hướng đến trang Booking
+                        return Redirect($"/Client/Booking/{id}/{checkIn}/{checkOut}");
+                    }
                     return RedirectToAction("Index", "Home", new { area = "Client" });
                 }
                 foreach (var error in result.Errors)

@@ -1,4 +1,6 @@
-﻿namespace HotelApp.Areas.Client.ViewModels
+﻿using HotelApp.Models;
+
+namespace HotelApp.Areas.Client.ViewModels
 {
     public class BookingVM
     {
@@ -23,6 +25,11 @@
         public DateTime CreateAt { get; set; }
         public string? Description { get; set; }
         public string? PaymentCode { get; set; }
+        public string? RoomCode { get; set; }
+        public string? UserFullName { get; set; } 
+        public string? UserEmail { get; set; } 
+        public string? UserPhoneNumber { get; set; }
 
+        public List<CCCD>? CCCD { get; set; }
     }
 }

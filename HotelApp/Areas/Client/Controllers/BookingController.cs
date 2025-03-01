@@ -33,10 +33,8 @@ namespace HotelApp.Areas.Client.Controllers
             string userID = user.Id;
 
             var bookings = _context.Bookings
-                            .Include(b => b.Room)
-                                .ThenInclude(r => r.RoomType)
-                            .Include(b => b.Room)
-                                .ThenInclude(r => r.Area)
+                            .Include(b => b.Room).ThenInclude(r => r.RoomType)
+                            .Include(b => b.Room).ThenInclude(r => r.Area)
                             .Include(b => b.User)
                             .Include(b => b.Voucher)
                             .Where(b => b.UserID == userID && b.Status != -100)

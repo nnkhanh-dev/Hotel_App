@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -19,4 +19,22 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+.text-ellipsis {
+    white-space: nowrap; /* Không cho phép xuống dòng */
+    overflow: hidden; /* Ẩn phần nội dung vượt quá khung */
+    text-overflow: ellipsis; /* Hiển thị dấu ... khi bị cắt */
+}
+.form-group{
+    margin: 10px 0;
+}
+
+.total-amount {
+    font-size: 2.5rem;
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
+    font-family: 'Roboto', sans-serif;
+    color: #dc3545;
 }

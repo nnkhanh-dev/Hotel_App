@@ -1,0 +1,34 @@
+﻿@model HotelApp.Areas.Admin.ViewModels.ProfileVM
+
+<div class="container-fluid d-flex justify-content-center align-items-center " style="background-image: url('/images/banner1.jpg'); background-size: cover; padding: 90px 0px;">
+    <div class="card shadow-lg" style="width: 400px;">
+        <!-- Button Group -->
+        <div class="btn-group w-100" role="group">
+            <a asp-action="Profile" class="btn" style="background-color: black; color: white;">
+                <i class="bi bi-person-circle"></i> Thông tin cá nhân
+            </a>
+            <a asp-action="ChangePassword" class="btn" style="border: 1px solid black; color: black;">
+                <i class="bi bi-lock-fill"></i> Đổi mật khẩu
+            </a>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body text-center">
+            <h2 class="card-title mb-3">Thông tin cá nhân</h2>
+            <div class="mb-3">
+                <img src="@Model.AvatarUrl" alt="Avatar" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+            </div>
+
+            <p class="card-text"><strong>Họ và tên:</strong> @Model.FullName</p>
+            <p class="card-text"><strong>Email:</strong> @Model.Email</p>
+            <p class="card-text"><strong>Số điện thoại:</strong> @Model.PhoneNumber</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="card-footer text-center">
+            <a asp-action="Edit" class="btn w-75" style="background-color: black; color: white;">
+                <i class="bi bi-pencil-square"></i> Cập nhật thông tin
+            </a>
+        </div>
+    </div>
+</div>
