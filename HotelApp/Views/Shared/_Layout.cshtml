@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="~/css/slider.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
     <header>
@@ -56,6 +57,9 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="@Url.Action("Rooms", "Hotel")">Đặt phòng</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("Chat", "Chat")">Tư vấn</a>
                                     </li>
                                 </ul>
                                 <div class="d-flex align-items-center">
@@ -117,6 +121,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/loaddata/loadroomtypes.js"></script>
     <script src="~/loaddata/loadvouchers.js"></script>
     <script src="~/loadData/LoadListRoom.js"></script>
@@ -138,3 +143,4 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+

@@ -1,11 +1,19 @@
 using HotelApp.Areas.Client.Services;
 using HotelApp.Data;
+using HotelApp.Hubs;
 using HotelApp.Models;
+using HotelApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Default");
+
+builder.Services.Configure<MailSettings>(
+    builder.Configuration.GetSection("MailSettings"));
+
+builder.Services.AddHttpClient();
+
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddIdentity<AppUser,IdentityRole>(options =>
@@ -30,8 +38,11 @@ builder.Services.AddSession(options =>
 
 
 builder.Services.AddScoped<IVNPayService, VNPayService>();
+builder.Services.AddScoped<IMailService, MailService>();
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -50,6 +61,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapHub<ChatHub>("/chathub");
 
 app.MapControllerRoute(
     name: "default",

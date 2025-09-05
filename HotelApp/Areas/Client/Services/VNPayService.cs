@@ -25,7 +25,7 @@ namespace HotelApp.Areas.Client.Services
             vnpay.AddRequestData("vnp_Version", _configuration["VNPay:Version"]);
             vnpay.AddRequestData("vnp_Command", _configuration["VNPay:Command"]);
             vnpay.AddRequestData("vnp_TmnCode", _configuration["VNPay:TmnCode"]);
-            vnpay.AddRequestData("vnp_Amount", ((int)(booking.Total * 100)).ToString());
+            vnpay.AddRequestData("vnp_Amount", ((long)(booking.Total * 100)).ToString());
             vnpay.AddRequestData("vnp_CreateDate", booking.CreateAt.ToString("yyyyMMddHHmmss"));
             vnpay.AddRequestData("vnp_CurrCode", _configuration["VNPay:CurrCode"]);
             vnpay.AddRequestData("vnp_IpAddr", Utils.GetIpAddress(context));

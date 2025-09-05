@@ -2,10 +2,12 @@
 using HotelApp.Areas.Client.ViewModels;
 using HotelApp.Data;
 using HotelApp.Models;
+using HotelApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace HotelApp.Areas.Client.Controllers
 {
@@ -17,12 +19,14 @@ namespace HotelApp.Areas.Client.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IVNPayService _vnpayService;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IMailService _mailService;
 
-        public BookingController(ApplicationDbContext context, IVNPayService vnpayService, UserManager<AppUser> userManager)
+        public BookingController(ApplicationDbContext context, IVNPayService vnpayService, UserManager<AppUser> userManager, IMailService mailService)
         {
             _context = context;
             _vnpayService = vnpayService;
             _userManager = userManager;
+            _mailService = mailService;
         }
 
         [HttpGet]
@@ -115,6 +119,7 @@ namespace HotelApp.Areas.Client.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = await _userManager.GetUserAsync(User);
                 if (booking.PayType == 1) // Thanh toán qua VNPay
                 {
                     Booking b = new Booking
@@ -155,6 +160,12 @@ namespace HotelApp.Areas.Client.Controllers
                     await _context.Bookings.AddAsync(b);
                     await _context.SaveChangesAsync();
                     TempData["Message"] = "Đặt phòng thành công";
+                    MailData mailData = new MailData();
+                    mailData.ReceiverEmail = user.Email;
+                    mailData.ReceiverName = user.FullName;
+                    mailData.Title = "Thông báo đặt phòng";
+                    mailData.Body = "Bạn đã đặt phòng thành công. Cảm ơn bạn đã đặt phòng của khách sạn chúng tôi, Hẹn gặp lại bạn nhé!";
+                    _mailService.SendMail(mailData);
                     return RedirectToAction("Result");
                 }
             }
@@ -170,8 +181,9 @@ namespace HotelApp.Areas.Client.Controllers
         }
 
         [Route("Client/PaymentReturn/")]
-        public IActionResult PaymentReturn()
+        public async Task<IActionResult> PaymentReturn()
         {
+            var user = await _userManager.GetUserAsync(User);
             var response = _vnpayService.PaymentExecute(Request.Query);
             if (response == null || response.VnPayResponseCode != "00")
             {
@@ -183,6 +195,12 @@ namespace HotelApp.Areas.Client.Controllers
             booking.Status = 0;
             _context.SaveChanges();
             TempData["Message"] = "Đặt phòng thành công";
+            MailData mailData = new MailData();
+            mailData.ReceiverEmail = user.Email;
+            mailData.ReceiverName = user.FullName;
+            mailData.Title = "Thông báo đặt phòng";
+            mailData.Body = "Bạn đã đặt phòng thành công. Cảm ơn bạn đã đặt phòng của khách sạn chúng tôi, Hẹn gặp lại bạn nhé!";
+            _mailService.SendMail(mailData);
             return RedirectToAction("Result");
         }
     }

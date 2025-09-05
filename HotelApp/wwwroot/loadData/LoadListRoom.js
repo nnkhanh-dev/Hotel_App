@@ -11,7 +11,12 @@
 
         // Kiểm tra xem ngày có hợp lệ không
         if (!checkIn || !checkOut || new Date(checkIn) >= new Date(checkOut)) {
-            alert('Vui lòng nhập ngày hợp lệ!');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Ngày không hợp lệ',
+                text: 'Vui lòng nhập ngày nhận và trả phòng hợp lệ!',
+                confirmButtonText: 'OK'
+            });
             return;
         }
 
@@ -107,50 +112,54 @@
 });
 
 function Detail(url) {
-    // Gửi yêu cầu AJAX để lấy chi tiết phòng
     $.ajax({
-        url: url,  // Đường dẫn tới action trong controller (ví dụ: /Detail/123)
+        url: url,
         method: 'GET',
         success: function (response) {
-            
-            $('#roomDetailModalBody').html(response); 
+
+            $('#roomDetailModalBody').html(response);
             $("#carouselExampleIndicators").owlCarousel({
-                loop: true,               // Quay vòng qua các ảnh
-                margin: 10,               // Khoảng cách giữa các ảnh
-                nav: true,                // Hiển thị các nút điều khiển (Previous/Next)
-                dots: true,               // Hiển thị các dấu chấm
-                autoplay: true,           // Tự động chuyển tiếp
-                autoplayTimeout: 3000,    // Thời gian giữa các slide
+                loop: true,
+                margin: 10,
+                nav: true,
+                dots: true,
+                autoplay: true,
+                autoplayTimeout: 3000,
                 responsive: {
-                    0: {
-                        items: 1          // Số ảnh trên màn hình nhỏ
-                    },
-                    600: {
-                        items: 1          // Số ảnh trên màn hình vừa
-                    },
-                    1000: {
-                        items: 1          // Số ảnh trên màn hình lớn
-                    }
+                    0: { items: 1 },
+                    600: { items: 1 },
+                    1000: { items: 1 }
                 }
             });
+
             $('#roomDetailModal').modal('show');
+
             $('#bookingBtn').click(function () {
                 const checkIn = $('#CheckIn').val();
                 const checkOut = $('#CheckOut').val();
-                const roomId = $(this).data('roomid'); // Lấy ID phòng từ thuộc tính data-roomId của button
+                const roomId = $(this).data('roomid');
 
-                // Hiển thị thông báo xác nhận
-                if (confirm("Bạn có chắc muốn đặt phòng này không?")) {
-                    // Điều hướng đến URL để xử lý đặt phòng
-                    window.location.href = `Booking/${roomId}/${checkIn}/${checkOut}`;
-                }
+                // Dùng SweetAlert2 để hiển thị xác nhận
+                Swal.fire({
+                    title: 'Xác nhận đặt phòng',
+                    text: 'Bạn có chắc muốn đặt phòng này không?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Đặt phòng',
+                    cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = `Booking/${roomId}/${checkIn}/${checkOut}`;
+                    }
+                });
             });
         },
         error: function (xhr, status, error) {
-            // Hiển thị lỗi chi tiết
             let errorMessage = `Lỗi: ${xhr.status} - ${xhr.statusText}\nChi tiết: ${xhr.responseText || error}`;
-            console.error(errorMessage); // Log lỗi chi tiết vào console
-            alert(errorMessage); // Hiển thị lỗi cụ thể cho người dùng
+            console.error(errorMessage);
+            alert(errorMessage);
         }
     });
 }
