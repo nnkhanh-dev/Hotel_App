@@ -9,15 +9,15 @@
 
                 response.data.forEach(voucher => {
                     htmlContent += `
-                        <div class="col-md-4">
-                            <div class="voucher_box" style="width: 350px; height: 400px;"> <!-- Đặt kích thước cố định cho voucher -->
-                                <div class="voucher_img" style="height: 200px;"> <!-- Chiều cao cố định cho vùng chứa ảnh -->
-                                    <figure><img src="${voucher.imagePath}" alt="#" style="width: 100%; height: 100%; object-fit: cover;" /></figure>
+                        <div class="item" style="height: auto; padding: 10px;">
+                            <div id="serv_hover" class="voucher_box" style="width: 100%; height: 400px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; background: white;">
+                                <div class="voucher_img" style="width: 100%; height: 257px; overflow: hidden; flex-shrink: 0;">
+                                    <img src="${voucher.imagePath}" alt="${voucher.name}" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
                                 </div>
-                                <div class="voucher_content" style="padding: 20px;">
-                                    <h3>${voucher.name}</h3>
-                                    <span>[${voucher.code}]</span>
-                                    <p>${voucher.description}</p>
+                                <div class="voucher_content" style="padding: 15px; height: 257px; display: flex; flex-direction: column; overflow: hidden;">
+                                    <h3 style="margin: 0 0 8px 0; font-size: 16px; line-height: 1.3; height: 42px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${voucher.name}</h3>
+                                    <p style="margin: 0 0 8px 0; font-size: 13px; color: #007bff; font-weight: bold;"><i class="fa fa-tag" aria-hidden="true"></i> Mã: ${voucher.code}</p>
+                                    <p style="margin: 0; font-size: 13px; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">${voucher.description}</p>
                                 </div>
                             </div>
                         </div>

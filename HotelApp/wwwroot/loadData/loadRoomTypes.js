@@ -29,14 +29,14 @@
                 let owlHtmlContent = '';
                 response.data.forEach(room => {
                     owlHtmlContent += `
-                        <div class="item" style="width: 350px; height: 400px;">
-                            <div id="serv_hover" class="room" style="width: 100%; height: 100%;">
-                                <div class="room_img" style="width: 100%; height: 200px">
-                                    <figure><img src="${room.imagePath}" alt="${room.name}" /></figure>
+                        <div class="item" style="height: auto; padding: 10px;">
+                            <div id="serv_hover" class="room" style="width: 100%; height: 400px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; background: white;">
+                                <div class="room_img" style="width: 100%; height: 257px; overflow: hidden; flex-shrink: 0;">
+                                    <img src="${room.imagePath}" alt="${room.name}" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
                                 </div>
-                                <div class="bed_room" style="padding: 20px 10px 10px 10px;">
-                                    <h3>${room.name}</h3>
-                                    <p>${room.description}</p>
+                                <div class="bed_room" style="padding: 15px; height: 257px; display: flex; flex-direction: column; overflow: hidden;">
+                                    <h3 style="margin: 0 0 12px 0; font-size: 16px; line-height: 1.3; height: 42px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${room.name}</h3>
+                                    <p style="margin: 0; font-size: 13px; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;">${room.description}</p>
                                 </div>
                             </div>
                         </div>
