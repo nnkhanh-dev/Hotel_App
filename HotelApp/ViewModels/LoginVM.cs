@@ -4,13 +4,15 @@ namespace HotelApp.ViewModels
 {
     public class LoginVM
     {
-        [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
-        [Required(ErrorMessage = "Email is required.")]
+        [Required(ErrorMessage = "Vui lòng nhập địa chỉ email")]
+        [EmailAddress(ErrorMessage = "Địa chỉ email không hợp lệ")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password is required.")]
-        [MinLength(8, ErrorMessage = "Password must be at least 8 characters long.")]
+        [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
+        [MinLength(8, ErrorMessage = "Mật khẩu phải có ít nhất 8 ký tự")]
         [DataType(DataType.Password)]
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
         [Display(Name = "Ghi nhớ tài khoản")]

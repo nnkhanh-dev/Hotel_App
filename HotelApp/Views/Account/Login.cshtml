@@ -1,45 +1,165 @@
 ﻿@model HotelApp.ViewModels.LoginVM
 
-
-    <div class="row justify-content-center align-items-center h-100" style="background-image: url('/images/banner1.jpg'); background-size: cover;">
-        <div class="col-md-4" style="margin:90px 0px;">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h2 class="text-center mb-4">ĐĂNG NHẬP</h2>
-                    <form method="post" asp-action="Login">
-                        <div class="mb-3">
-                            <label for="Email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="Email" name="Email" required />
-                            <span asp-validation-for="Email" class="text-danger"></span>
+<div class="row justify-content-center align-items-center h-100" style="background-image: url('/images/banner1.jpg'); background-size: cover;">
+    <div class="col-md-4" style="margin:90px 0px;">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="text-center mb-4">ĐĂNG NHẬP</h2>
+                
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    var generalErrors = ViewData.ModelState.Where(x => x.Key == string.Empty).SelectMany(x => x.Value.Errors);
+                    if (generalErrors.Any())
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fa fa-exclamation-circle"></i>
+                            <strong>Lỗi đăng nhập:</strong>
+                            @foreach (var error in generalErrors)
+                            {
+                                <div>@error.ErrorMessage</div>
+                            }
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
+                    }
+                }
 
-                        <div class="mb-3">
-                            <label for="Password" class="form-label">Mật khẩu</label>
-                            <input type="password" class="form-control" id="Password" name="Password" required />
-                            <span asp-validation-for="Password" class="text-danger"></span>
+                <form method="post" asp-action="Login" id="loginForm">
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Email <span class="text-danger">*</span></label>
+                        <input type="email" 
+                               class="form-control" 
+                               id="Email" 
+                               name="Email" 
+                               asp-for="Email"
+                               placeholder="example@email.com" />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Password" class="form-label">Mật khẩu <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <input type="password" 
+                                   class="form-control" 
+                                   id="Password" 
+                                   name="Password" 
+                                   asp-for="Password"
+                                   placeholder="Nhập mật khẩu" />
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="fa fa-eye"></i>
+                            </button>
                         </div>
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
 
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="RememberMe" name="RememberMe" />
-                            <label class="form-check-label" for="RememberMe">Lưu thông tin đăng nhập</label>
-                        </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="RememberMe" name="RememberMe" asp-for="RememberMe" />
+                        <label class="form-check-label" for="RememberMe">Lưu thông tin đăng nhập</label>
+                    </div>
 
-                    <button type="submit" class="btn w-100" style="background-color: black; color: white">Đăng nhập</button>
-                    </form>
+                    <button type="submit" class="btn w-100" style="background-color: black; color: white">
+                        <i class="fa fa-sign-in"></i> Đăng nhập
+                    </button>
+                </form>
 
-                    <p class="text-center mt-3">
-                        <a href="@Url.Action("Register", "Account")">Đăng ký ngay</a> |
-                        <a href="@Url.Action("ForgotPassword", "Account")">Quên mật khẩu</a>
-                    </p>
-                    
-                </div>
+                <p class="text-center mt-3">
+                    <a href="@Url.Action("Register", "Account")">Đăng ký ngay</a> |
+                    <a href="@Url.Action("ForgotPassword", "Account")">Quên mật khẩu</a>
+                </p>
+                
             </div>
         </div>
     </div>
-
+</div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    
+    <script>
+        $(document).ready(function() {
+            // Toggle password visibility
+            $('#togglePassword').on('click', function() {
+                const passwordInput = $('#Password');
+                const icon = $(this).find('i');
+                
+                if (passwordInput.attr('type') === 'password') {
+                    passwordInput.attr('type', 'text');
+                    icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                } else {
+                    passwordInput.attr('type', 'password');
+                    icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                }
+            });
+
+            // Form validation setup
+            $('#loginForm').validate({
+                rules: {
+                    Email: {
+                        required: true,
+                        email: true
+                    },
+                    Password: {
+                        required: true,
+                        minlength: 8
+                    }
+                },
+                messages: {
+                    Email: {
+                        required: "Vui lòng nhập địa chỉ email",
+                        email: "Vui lòng nhập địa chỉ email hợp lệ"
+                    },
+                    Password: {
+                        required: "Vui lòng nhập mật khẩu",
+                        minlength: "Mật khẩu phải có ít nhất 8 ký tự"
+                    }
+                },
+                errorElement: 'span',
+                errorClass: 'text-danger small',
+                errorPlacement: function(error, element) {
+                    if (element.parent().hasClass('input-group')) {
+                        error.insertAfter(element.parent());
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function(element) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element) {
+                    $(element).removeClass('is-invalid');
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+    
+    <style>
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+        
+        .alert {
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .form-control:focus {
+            border-color: #000000;
+            box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.15);
+        }
+        
+        .input-group .btn-outline-secondary {
+            border-color: #ced4da;
+        }
+        
+        .input-group .btn-outline-secondary:hover {
+            background-color: #f8f9fa;
+            border-color: #000000;
+        }
+    </style>
 }
