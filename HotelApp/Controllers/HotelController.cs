@@ -244,6 +244,75 @@ namespace HotelApp.Controllers
             }
         }
 
+        [Route("/GetListTopRoom")]
+        public async Task<IActionResult> GetListTopRoom()
+        {
+            var topRooms = await _context.Bookings
+                .Where(b => b.Status != -100) // Loại trừ các booking bị hủy
+                .GroupBy(b => b.RoomID)
+                .Select(g => new
+                {
+                    RoomID = g.Key,
+                    BookingCount = g.Count()
+                })
+                .OrderByDescending(x => x.BookingCount)
+                .Take(20)
+                .Join(_context.Rooms.Include(r => r.RoomType).Include(r => r.Area).Include(r => r.Images).Include(r => r.Amenities),
+                    booking => booking.RoomID,
+                    room => room.Id,
+                    (booking, room) => new
+                    {
+                        Id = room.Id,
+                        TypeName = room.RoomType.Name,
+                        AreaName = room.Area.Name,
+                        Price = room.Price,
+                        Discount = room.Discount,
+                        Status = room.Status,
+                        StatusStr = room.Status == 0 ? "Sẵn sàng" : room.Status == 1 ? "Đang sử dụng" : "Bảo trì",
+                        ImageUrls = room.Images.Select(img => Url.Content(img.Path)).ToList(),
+                        AmenityNames = room.Amenities.Select(a => a.Name).ToList(),
+                        BookingCount = booking.BookingCount
+                    })
+                .ToListAsync();
+
+            return Json(new { data = topRooms });
+        }
+
+        [Route("/CheckRoomAvailability/{id}")]
+        public async Task<IActionResult> CheckRoomAvailability(int id, DateTime checkIn, DateTime checkOut)
+        {
+            // Kiểm tra ngày hợp lệ
+            if (checkIn >= checkOut)
+            {
+                return Json(new { success = false, message = "Ngày đến phải trước ngày đi!" });
+            }
+
+            if (checkIn < DateTime.Today)
+            {
+                return Json(new { success = false, message = "Ngày đến không được là ngày trong quá khứ!" });
+            }
+
+            // Kiểm tra phòng có tồn tại không
+            var room = await _context.Rooms.FindAsync(id);
+            if (room == null)
+            {
+                return Json(new { success = false, message = "Phòng không tồn tại!" });
+            }
+
+            // Kiểm tra phòng có bị đặt trong khoảng thời gian này không
+            var isBooked = await _context.Bookings
+                .AnyAsync(b => b.RoomID == id && 
+                              b.Status != 3 && b.Status != -100 && // Loại trừ đã trả phòng và đã hủy
+                              b.CheckIn < checkOut && b.CheckOut > checkIn);
+
+            if (isBooked)
+            {
+                return Json(new { success = false, message = "Phòng đã được đặt trong khoảng thời gian này. Vui lòng chọn ngày khác!" });
+            }
+
+            return Json(new { success = true, message = "Phòng còn trống!" });
+        }
+
         
     }
 }

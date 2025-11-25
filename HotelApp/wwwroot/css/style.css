@@ -299,15 +299,15 @@ header {
 .header {
 <<<<<<< HEAD
 
-    width: 100%;
-    padding: 15px 0px 15px 0px;
-    background: #fff;
+     width: 100%;
+     padding: 15px 0px 15px 0px;
+     background: #fff;
 =======
-    width: 100%;
-    padding: 15px 0px 15px 0px;
-    background: #fff;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng bóng mờ */
-    z-index: 10; /* Đảm bảo header hiển thị ở trên các phần tử khác */
+     width: 100%;
+     padding: 15px 0px 15px 0px;
+     background: #fff;
+     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng bóng mờ */
+     z-index: 10; /* Đảm bảo header hiển thị ở trên các phần tử khác */
     
 
 >>>>>>> master
@@ -1009,3 +1009,41 @@ line-height: 35px;
 .chat-card .card-footer {
     background-color: #0f1521;
 }
+
+.book_room {
+    max-width: 600px;
+    background-color: black;
+    padding: 16px 32px;
+    border-radius: 6px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.book_room h2{
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.book_room p{
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+    padding-bottom: 12px;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+

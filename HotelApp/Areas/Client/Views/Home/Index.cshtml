@@ -30,6 +30,42 @@
 
 
 <!-- end banner -->
+<!-- Phòng nổi bật -->
+<section class="top_rooms" id="PhongNoiBat" style="min-height: 100vh; display: flex; align-items: center; padding: 50px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>PHÒNG NỔI BẬT</h2>
+                    <p>Top 20 phòng được đặt nhiều nhất</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="listTopRooms" class="owl-carousel">
+                <!--Đẩy dữ liệu bằng ajax-->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end Phòng nổi bật -->
+
+<!-- Modal Chi tiết phòng nổi bật -->
+<div class="modal fade" id="topRoomDetailModal" tabindex="-1" aria-labelledby="topRoomDetailModalLabel" aria-hidden="true" style="z-index: 9999;">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="topRoomDetailModalLabel">Chi tiết phòng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="topRoomDetailContent">
+                <!-- Nội dung chi tiết phòng sẽ được load ở đây -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Modal -->
+
 <!-- Loại phòng -->
 <div class="our_room">
     <div class="container">

@@ -120,6 +120,8 @@ namespace HotelApp.Areas.Admin.Controllers
                 return BadRequest();
             }
 
+            ModelState.Remove("Image");
+
             if (ModelState.IsValid)
             {
                 try

@@ -3,14 +3,30 @@
 <div class="room-detail">
     <h2>@Model.TypeName - @Model.AreaName</h2>
 
-    <!-- Owl Carousel -->
-    <div id="carouselExampleIndicators" class="owl-carousel owl-theme">
-        @foreach (var imageUrl in Model.ImageUrls)
-        {
-            <div class="item">
-                <img src="@imageUrl" alt="Room Image" class="d-block w-100 img-fluid" style="height: 300px;object-fit:fill;">
-            </div>
-        }
+    <!-- Bootstrap Carousel -->
+    <div id="roomDetailCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            @for (int i = 0; i < Model.ImageUrls.Count; i++)
+            {
+                <button type="button" data-bs-target="#roomDetailCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "false")" aria-label="Slide @(i + 1)"></button>
+            }
+        </div>
+        <div class="carousel-inner">
+            @for (int i = 0; i < Model.ImageUrls.Count; i++)
+            {
+                <div class="carousel-item @(i == 0 ? "active" : "")">
+                    <img src="@Model.ImageUrls[i]" class="d-block w-100" alt="Room Image" style="height: 400px; object-fit: cover;">
+                </div>
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#roomDetailCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#roomDetailCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
     <h5>@Model.Description</h5>
     <h3>
@@ -33,5 +49,17 @@
             <li class="btn btn-sm btn-primary mt-1">@amenity</li>
         }
     </ul>
-    <button id="bookingBtn" data-roomid ="@Model.Id" class="btn w-100  my-3" style="background-color: black; color: white;">Đặt ngay</button>
+    
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <label for="checkInDate" class="form-label">Ngày đến:</label>
+            <input type="date" id="checkInDate" class="form-control" min="@DateTime.Today.ToString("yyyy-MM-dd")" required>
+        </div>
+        <div class="col-md-6">
+            <label for="checkOutDate" class="form-label">Ngày đi:</label>
+            <input type="date" id="checkOutDate" class="form-control" min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")" required>
+        </div>
+    </div>
+    
+    <button id="bookingBtn" data-roomid="@Model.Id" class="btn w-100 my-3" style="background-color: black; color: white;">Đặt ngay</button>
 </div>
