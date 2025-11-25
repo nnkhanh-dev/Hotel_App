@@ -52,22 +52,39 @@ function loadTopRooms() {
                 // Khởi tạo Owl Carousel
                 $('#listTopRooms').owlCarousel({
                     items: 1,
-                    margin: 20,
+                    margin: 0,
                     loop: true,
                     autoplay: true,
                     autoplayTimeout: 5000,
                     autoHeight: false,
                     nav: true,
                     dots: false,
+                    stagePadding: 0,
                     navText: [
-                        '<span style="font-size: 24px; cursor: pointer;">&#9664;</span>',
-                        '<span style="font-size: 24px; cursor: pointer;">&#9654;</span>'
+                        '<i class="fa fa-chevron-left"></i>',
+                        '<i class="fa fa-chevron-right"></i>'
                     ],
                     responsive: {
-                        0: { items: 1 },
-                        600: { items: 1 },
-                        1000: { items: 2 },
-                        1200: { items: 3 }
+                        0: { 
+                            items: 1,
+                            margin: 0,
+                            stagePadding: 0
+                        },
+                        600: { 
+                            items: 1,
+                            margin: 0,
+                            stagePadding: 0
+                        },
+                        1000: { 
+                            items: 2,
+                            margin: 0,
+                            stagePadding: 0
+                        },
+                        1200: { 
+                            items: 3,
+                            margin: 0,
+                            stagePadding: 0
+                        }
                     }
                 });
             } else {
@@ -90,12 +107,8 @@ function viewTopRoomDetail(roomId) {
             // Load nội dung modal
             $('#topRoomDetailContent').html(response);
             
-            // Đảm bảo modal-backdrop có z-index cao
-            $('.modal-backdrop').css('z-index', '9998');
-            
-            // Hiển thị modal
-            var modal = new bootstrap.Modal(document.getElementById('topRoomDetailModal'));
-            modal.show();
+            // Hiển thị modal bằng jQuery Bootstrap 4
+            $('#topRoomDetailModal').modal('show');
             
             // Gắn sự kiện cho nút đặt phòng
             $('#bookingBtn').off('click').on('click', function() {

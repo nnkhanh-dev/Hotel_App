@@ -1,0 +1,61 @@
+<!-- Floating Chat Widget -->
+<button class="floating-chat-btn" type="button" aria-label="Open chat">
+    <svg class="chat-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+        <path d="M7 9h10v2H7zm0-3h10v2H7z"/>
+    </svg>
+    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+    </svg>
+</button>
+
+<div class="floating-chat-window">
+    <div class="chat-window-header">
+        <div class="chat-header-info">
+            <div class="chat-avatar">AI</div>
+            <div class="chat-header-text">
+                <h4>UTEHotel Support</h4>
+                <p>Trực tuyến - Sẵn sàng hỗ trợ</p>
+            </div>
+        </div>
+        <button class="chat-minimize-btn" type="button" aria-label="Minimize chat">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"/>
+            </svg>
+        </button>
+    </div>
+
+    <div class="chat-window-body">
+        <div class="chat-message-wrapper ai">
+            <div class="message ai-message">
+                Xin chào! 👋 Tôi là trợ lý AI của UTEHotel. Tôi có thể giúp gì cho bạn hôm nay?
+            </div>
+        </div>
+
+        <div class="typing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="chat-window-footer">
+        <form id="floatingChatForm" class="chat-input-wrapper">
+            <input 
+                type="text" 
+                id="floatingChatInput" 
+                placeholder="Nhập tin nhắn..." 
+                autocomplete="off"
+                maxlength="500"
+            />
+            <button type="submit" class="chat-send-btn" aria-label="Send message">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- SignalR Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>

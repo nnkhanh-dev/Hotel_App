@@ -1,37 +1,23 @@
 ﻿    <!-- banner -->
 <section class="banner_main">
     <div class="booking_online">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-1">
-                </div>
-                <div class="col-4">
-                    <div class="book_room p-4 shadow-lg rounded bg-black">
-                        <h2 class="text-center mb-4 text-white" style="font-size: 2rem;">ĐẶT PHÒNG NGAY</h2>
-                        <p class="text-center text-white mb-4" style="font-size: 1.3rem;">
-                            Tận hưởng kỳ nghỉ tuyệt vời tại khách sạn của chúng tôi với các dịch vụ sang trọng, không gian thoải mái và giá cả hợp lý.
-                            Hãy khám phá những căn phòng phù hợp với bạn và người thân ngay hôm nay!
-                        </p>
-                        <div class="row">
-                            <div class="col-md-12 text-center">
-                                <a href="/Rooms" class="book_btn btn btn-danger w-100 py-2" style="font-size: 1.5rem;">
-                                    Tìm phòng lý tưởng của bạn
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+        <div class="container d-flex justify-content-center d-lg-block">
+            <div class="book_room">
+                <h2>ĐẶT PHÒNG NGAY</h2>
+                <p>
+                    Tận hưởng kỳ nghỉ tuyệt vời tại khách sạn của chúng tôi với các dịch vụ sang trọng, không gian thoải mái và giá cả hợp lý.
+                    Hãy khám phá những căn phòng phù hợp với bạn và người thân ngay hôm nay!
+                </p>
+                <a href="/Rooms" class="book_btn btn btn-danger w-100">
+                    Tìm phòng lý tưởng của bạn
+                </a>
             </div>
         </div>
     </div>
 </section>
-
-
-
 <!-- end banner -->
 <!-- Phòng nổi bật -->
-<section class="top_rooms" id="PhongNoiBat" style="min-height: 100vh; display: flex; align-items: center; padding: 50px 0;">
+<section class="top_rooms" id="PhongNoiBat" style="min-height: 900px; padding: 50px 0;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -49,25 +35,25 @@
     </div>
 </section>
 <!-- end Phòng nổi bật -->
-
 <!-- Modal Chi tiết phòng nổi bật -->
-<div class="modal fade" id="topRoomDetailModal" tabindex="-1" aria-labelledby="topRoomDetailModalLabel" aria-hidden="true" style="z-index: 9999;">
+<section class="modal fade" id="topRoomDetailModal" tabindex="-1" aria-labelledby="topRoomDetailModalLabel" aria-hidden="true" style="z-index: 9999;">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="topRoomDetailModalLabel">Chi tiết phòng</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body" id="topRoomDetailContent">
                 <!-- Nội dung chi tiết phòng sẽ được load ở đây -->
             </div>
         </div>
     </div>
-</div>
+</section>
 <!-- end Modal -->
-
 <!-- Loại phòng -->
-<div class="our_room">
+<section class="our_room" id="Phong">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -83,10 +69,10 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 <!-- Loại phòng -->
 <!-- Ưu đãi -->
-<div class="voucher">
+<section class="voucher" id="UuDai">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -102,49 +88,43 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 <!--Ưu đãi -->
 <!--  contact -->
-<div class="contact">
+<section class="contact" id="LienHe">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="titlepage">
-                    <h2>LIÊN HỆ CHÚNG TÔI</h2>
-                </div>
-            </div>
+        <div class="titlepage">
+            <h2>LIÊN HỆ CHÚNG TÔI</h2>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-12">
                 <form id="request" class="main_form" asp-action="Contact" asp-controller="Hotel">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <input class="contactus" placeholder="Họ tên" type="text" name="Name">
-                        </div>
-                        <div class="col-md-12">
-                            <input class="contactus" placeholder="Email" type="email" name="Email">
-                        </div>
-                        <div class="col-md-12">
-                            <input class="contactus" placeholder="Số điện thoại" type="text" name="PhoneNumber">
-                        </div>
-                        <div class="col-md-12">
-                            <textarea class="textarea" placeholder="Nội dung" name="Message"></textarea>
-                        </div>
-                        <div class="col-md-12">
-                            <button type="submit" class="send_btn">Gửi</button>
-                        </div>
+                    <div>
+                        <input class="contactus" placeholder="Họ tên" type="text" name="Name">
+                    </div>
+                    <div>
+                        <input class="contactus" placeholder="Email" type="email" name="Email">
+                    </div>
+                    <div>
+                        <input class="contactus" placeholder="Số điện thoại" type="text" name="PhoneNumber">
+                    </div>
+                    <div>
+                        <textarea class="textarea" placeholder="Nội dung" name="Message"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="send_btn">Gửi</button>
                     </div>
                 </form>
 
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-12">
                 <div class="map_main">
                     <div class="map-responsive">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.7714039449547!2d108.21084937460013!3d16.0773479392216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142184792140755%3A0xd4058cb259787dac!2sUniversity%20of%20Technology%20and%20Education%20-%20University%20of%20%C4%90%C3%A0%20N%E1%BA%B5ng!5e0!3m2!1sen!2s!4v1730629378836!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.7714039449547!2d108.21084937460013!3d16.0773479392216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142184792140755%3A0xd4058cb259787dac!2sUniversity%20of%20Technology%20and%20Education%20-%20University%20of%20%C4%90%C3%A0%20N%E1%BA%B5ng!5e0!3m2!1sen!2s!4v1730629378836!5m2!1sen!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 <!-- end contact -->

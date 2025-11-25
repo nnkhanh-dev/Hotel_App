@@ -29,21 +29,38 @@
                 // Khởi tạo Owl Carousel
                 $('#listVoucher').owlCarousel({
                     items: 1,
-                    margin: 10,
+                    margin: 0,
                     loop: true,
                     autoplay: true,
                     autoplayTimeout: 5000,
-                    nav: true,            // Hiển thị nút điều hướng
-                    dots: false,           // Ẩn các dấu chấm
+                    nav: true,
+                    dots: false,
+                    stagePadding: 0,
                     navText: [
-                        '<span style="font-size: 24px; cursor: pointer;">&#9664;</span>',
-                        '<span style="font-size: 24px; cursor: pointer;">&#9654;</span>'
+                        '<i class="fa fa-chevron-left"></i>',
+                        '<i class="fa fa-chevron-right"></i>'
                     ],
                     responsive: {
-                        0: { items: 1 },
-                        600: { items: 1 },
-                        1000: { items: 2 },
-                        1200: { items: 3 }   
+                        0: { 
+                            items: 1,
+                            margin: 0,
+                            stagePadding: 0
+                        },
+                        600: { 
+                            items: 1,
+                            margin: 0,
+                            stagePadding: 0
+                        },
+                        1000: { 
+                            items: 2,
+                            margin: 0,
+                            stagePadding: 0
+                        },
+                        1200: { 
+                            items: 3,
+                            margin: 0,
+                            stagePadding: 0
+                        }
                     }
                 });
             } else {

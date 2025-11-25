@@ -1,0 +1,209 @@
+/* ==========================================
+   CAROUSEL OVERFLOW FIX
+   ========================================== */
+
+/* Prevent horizontal overflow */
+html {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+}
+
+body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    position: relative;
+}
+
+/* Container overflow fix */
+.container,
+.container-fluid {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Section overflow fix */
+section {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+    width: 100%;
+}
+
+/* Owl Carousel specific fixes */
+.owl-carousel {
+    overflow: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    position: relative !important;
+}
+
+.owl-carousel .owl-stage-outer {
+    overflow: visible !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.owl-carousel .owl-stage {
+    display: flex;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.owl-carousel .owl-item {
+    float: none;
+    padding: 10px !important;
+}
+
+/* Fix for carousel items */
+.owl-carousel .item {
+    overflow: hidden !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+}
+
+/* Wrapper for carousel */
+#listTopRooms,
+#listRoomType,
+#listVoucher {
+    overflow: hidden !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+}
+
+/* Hide navigation buttons */
+.owl-carousel .owl-nav {
+    display: none !important;
+}
+
+/* Row overflow fix */
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+/* Specific section fixes */
+.top_rooms,
+.our_room,
+.voucher {
+    overflow-x: hidden !important;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.top_rooms .container,
+.our_room .container,
+.voucher .container {
+    overflow-x: hidden !important;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.top_rooms .row,
+.our_room .row,
+.voucher .row {
+    overflow-x: hidden !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Banner section fix */
+.banner_main {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* Card overflow prevention */
+.room,
+.voucher_box {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Image overflow fix */
+.room_img img,
+.voucher_img img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive container padding */
+@media (max-width: 991px) {
+    html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+
+    .container {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        max-width: 100% !important;
+    }
+
+    .owl-carousel .owl-item {
+        padding: 0 5px;
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    section {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .owl-carousel .owl-nav button.owl-prev,
+    .owl-carousel .owl-nav button.owl-next {
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 18px;
+    }
+}
+
+/* Fix carousel on mobile */
+@media (max-width: 575px) {
+    html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        width: 100vw !important;
+    }
+
+    .container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .owl-carousel {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .owl-carousel .item {
+        padding: 0 3px !important;
+        margin: 0 !important;
+    }
+
+    .owl-carousel .owl-item {
+        padding: 0 3px !important;
+    }
+
+    .owl-carousel .owl-nav button.owl-prev {
+        left: 5px;
+    }
+
+    .owl-carousel .owl-nav button.owl-next {
+        right: 5px;
+    }
+}
